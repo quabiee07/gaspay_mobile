@@ -1,0 +1,118 @@
+import 'package:flutter/material.dart';
+
+import 'colors/colors.dart';
+
+class MyTextTheme {
+  static const _color1d = Color(0xff1d1d1d);
+  static const lightTextTheme = TextTheme(
+      displayLarge: TextStyle(
+          color: textColorLight,
+          fontFamily: 'DMSans',
+          fontWeight: FontWeight.w700),
+      displayMedium: TextStyle(
+          color: textColorLight,
+          fontFamily: 'DMSans',
+          fontSize: 16,
+          fontWeight: FontWeight.w500),
+      displaySmall: TextStyle(
+          color: textColorLight,
+          fontFamily: 'DMSans',
+          fontSize: 14,
+          fontWeight: FontWeight.normal),
+      bodySmall: TextStyle(
+        color: textColorLight,
+        fontFamily: 'DMSans',
+        fontSize: 14,
+      ),
+      bodyMedium: TextStyle(
+          color: textColorLight,
+          fontFamily: 'DMSans',
+          fontSize: 14,
+          fontWeight: FontWeight.w500),
+      bodyLarge: TextStyle(
+          color: textColorLight,
+          fontFamily: 'DMSans',
+          fontSize: 14,
+          fontWeight: FontWeight.w700),
+      titleLarge: TextStyle(
+          color: _color1d,
+          fontFamily: 'DMSans',
+          fontSize: 24,
+          fontWeight: FontWeight.w700),
+      titleMedium: TextStyle(
+          color: _color1d,
+          fontFamily: 'DMSans',
+          fontSize: 16,
+          fontWeight: FontWeight.w700),
+      titleSmall: TextStyle(
+          color: _color1d,
+          fontFamily: 'DMSans',
+          fontSize: 14,
+          fontWeight: FontWeight.w300),
+      labelLarge: TextStyle(
+          color: _color1d,
+          fontFamily: 'DMSans',
+          fontSize: 16,
+          fontWeight: FontWeight.w700),
+      labelMedium: TextStyle(
+          color: textColorLight,
+          fontFamily: 'DMSans',
+          fontSize: 16,
+          fontWeight: FontWeight.w500));
+
+  static const darkTextTheme = TextTheme(
+      displayLarge: TextStyle(
+          color: textColorDark,
+          fontFamily: 'DMSans',
+          fontWeight: FontWeight.w700),
+      displayMedium: TextStyle(
+          color: textColorDark,
+          fontFamily: 'DMSans',
+          fontSize: 16,
+          fontWeight: FontWeight.w500),
+      displaySmall: TextStyle(
+          color: textColorDark,
+          fontFamily: 'DMSans',
+          fontSize: 14,
+          fontWeight: FontWeight.normal),
+      bodySmall: TextStyle(
+        color: textColorDark,
+        fontFamily: 'DMSans',
+        fontSize: 14,
+      ),
+      bodyMedium: TextStyle(
+          color: textColorDark,
+          fontFamily: 'DMSans',
+          fontSize: 14,
+          fontWeight: FontWeight.w500),
+      bodyLarge: TextStyle(
+          color: textColorDark,
+          fontFamily: 'DMSans',
+          fontSize: 14,
+          fontWeight: FontWeight.w700),
+      titleLarge: TextStyle(
+          color: textColorDark,
+          fontFamily: 'DMSans',
+          fontSize: 24,
+          fontWeight: FontWeight.w700),
+      titleMedium: TextStyle(
+          color: textColorDark,
+          fontFamily: 'DMSans',
+          fontSize: 18,
+          fontWeight: FontWeight.w500),
+      titleSmall: TextStyle(
+          color: textColorDark,
+          fontFamily: 'DMSans',
+          fontSize: 14,
+          fontWeight: FontWeight.w300),
+      labelLarge: TextStyle(
+          color: textColorDark,
+          fontFamily: 'DMSans',
+          fontSize: 16,
+          fontWeight: FontWeight.w700),
+      labelMedium: TextStyle(
+          color: textColorDark,
+          fontFamily: 'DMSans',
+          fontSize: 16,
+          fontWeight: FontWeight.w500));
+}
