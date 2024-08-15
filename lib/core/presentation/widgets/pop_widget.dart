@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile_template/core/presentation/utils/navigation_mixin.dart';
-import 'package:flutter_mobile_template/core/presentation/widgets/clickable.dart';
-import 'package:flutter_mobile_template/core/presentation/widgets/svg_image.dart';
+import 'package:gaspay_mobile/core/presentation/utils/navigation_mixin.dart';
+import 'package:gaspay_mobile/core/presentation/widgets/clickable.dart';
+import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
 
 class PopWidget extends StatelessWidget {
   const PopWidget({super.key, this.callback});

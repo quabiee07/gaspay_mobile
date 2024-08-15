@@ -1,4 +1,4 @@
-package com.example.flutter_mobile_template
+package com.blaitware.gaspay
 
 import io.flutter.embedding.android.FlutterActivity
 

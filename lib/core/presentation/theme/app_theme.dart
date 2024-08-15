@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile_template/core/presentation/theme/colors/colors.dart';
-import 'package:flutter_mobile_template/core/presentation/theme/colors/snack_bar_colors.dart';
-import 'package:flutter_mobile_template/core/presentation/theme/my_text_theme.dart';
+import 'package:gaspay_mobile/core/presentation/theme/colors/colors.dart';
+import 'package:gaspay_mobile/core/presentation/theme/colors/snack_bar_colors.dart';
+import 'package:gaspay_mobile/core/presentation/theme/my_text_theme.dart';
 
 mixin AppTheme {
   ThemeData lightTheme() {
     return ThemeData.from(
       colorScheme: const ColorScheme.light(
-        surface: Color(0xffF8F8F8),
-        onSurface: textColorLight,
+        surface: Color(0xffFFFFFF),
+        onSurface: Color(0xFF002933),
+        onSecondary: Color(0xFF143A43),
+        primary: Color(0xFF1875F7),
+        secondary: Color(0xFFE6E6E6), // Borde
         tertiary: textAccentLight,
-        secondary: cardBackgorund,
       ),
     ).copyWith(
-        scaffoldBackgroundColor: const Color(0xffF8F8F8),
+        scaffoldBackgroundColor: const Color(0xffFFFFFF),
         primaryColor: _buttonLightColor,
         splashFactory: NoSplash.splashFactory,
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -31,7 +33,7 @@ mixin AppTheme {
         inputDecorationTheme: InputDecorationTheme(
           hintStyle: const TextStyle(
             color: Color(0xFF959595),
-            fontFamily: 'DMSans',
+            fontFamily: 'Satoshi',
             fontSize: 14,
           ),
           contentPadding:
@@ -40,7 +42,7 @@ mixin AppTheme {
           fillColor: Colors.white,
           errorStyle: const TextStyle(
             color: errorForeground,
-            fontFamily: 'DMSans',
+            fontFamily: 'Satoshi',
             fontSize: 14,
           ),
           border: _inputBorderLight,
@@ -51,20 +53,20 @@ mixin AppTheme {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: _buttonLightColor,
-            disabledBackgroundColor: Colors.grey,
+            backgroundColor: const Color(0xFF1875F7),
+            disabledBackgroundColor: const Color(0xFF94B6E6),
             minimumSize: const Size(double.infinity, double.infinity),
             foregroundColor: Colors.white,
             shadowColor: buttonColor.withOpacity(0.05),
             textStyle: const TextStyle(
-                fontFamily: 'DMSans',
+                fontFamily: 'Satoshi',
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
                 color: Colors.white),
             overlayColor: Colors.white,
             splashFactory: NoSplash.splashFactory,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(50)),
+              borderRadius: BorderRadius.all(Radius.circular(24)),
             ),
           ),
         ),
@@ -102,7 +104,7 @@ mixin AppTheme {
         inputDecorationTheme: InputDecorationTheme(
           hintStyle: const TextStyle(
             color: Color(0xFF959595),
-            fontFamily: 'DMSans',
+            fontFamily: 'Satoshi',
             fontSize: 14,
           ),
           contentPadding:
@@ -111,7 +113,7 @@ mixin AppTheme {
           fillColor: cardBackgroundDark,
           errorStyle: const TextStyle(
             color: errorForeground,
-            fontFamily: 'DMSans',
+            fontFamily: 'Satoshi',
             fontSize: 14,
           ),
           border: _inputBorderDark,
@@ -128,7 +130,7 @@ mixin AppTheme {
             foregroundColor: Colors.white,
             shadowColor: buttonColor.withOpacity(0.05),
             textStyle: const TextStyle(
-                fontFamily: 'DMSans',
+                fontFamily: 'Satoshi',
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
                 color: textColorDark),

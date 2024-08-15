@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile_template/core/presentation/manager/custom_provider.dart';
+import 'package:gaspay_mobile/core/presentation/manager/custom_provider.dart';
 import 'package:provider/provider.dart';
+
 class ProviderWidget<T extends CustomProvider> extends StatelessWidget {
   const ProviderWidget({
     required this.provider,

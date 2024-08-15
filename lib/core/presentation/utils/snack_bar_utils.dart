@@ -1,6 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile_template/core/presentation/theme/colors/snack_bar_colors.dart';
+import 'package:gaspay_mobile/core/presentation/theme/colors/snack_bar_colors.dart';
 import 'package:logger/logger.dart';
 
 extension SnackbarStateless on BuildContext {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile_template/core/presentation/widgets/clickable.dart';
-import 'package:flutter_mobile_template/core/presentation/widgets/custom_image.dart';
-import 'package:flutter_mobile_template/core/presentation/widgets/inputfield_state.dart';
-import 'package:flutter_mobile_template/core/presentation/widgets/svg_image.dart';
-
+import 'package:gaspay_mobile/core/presentation/widgets/clickable.dart';
+import 'package:gaspay_mobile/core/presentation/widgets/custom_image.dart';
+import 'package:gaspay_mobile/core/presentation/widgets/inputfield_state.dart';
+import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
 
 class InputField extends TextFieldParent {
   const InputField(
