@@ -12,7 +12,7 @@ mixin AppTheme {
         onSecondary: Color(0xFF143A43),
         primary: Color(0xFF1875F7),
         secondary: Color(0xFFE6E6E6), // Borde
-        tertiary: textAccentLight,
+        tertiary:  Color(0xFFF4F4F4),
       ),
     ).copyWith(
         scaffoldBackgroundColor: const Color(0xffFFFFFF),

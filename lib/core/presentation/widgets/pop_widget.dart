@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:gaspay_mobile/core/presentation/resources/drawables.dart';
 import 'package:gaspay_mobile/core/presentation/utils/navigation_mixin.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/clickable.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
@@ -18,10 +20,22 @@ class PopWidget extends StatelessWidget {
               }
             : callback!,
         child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: SvgImage(
-            asset: '',
-            color: theme.colorScheme.onSurface,
+          padding: const EdgeInsets.only(top: 8),
+          child: Row(
+            children: [
+              const SvgImage(
+                asset: icArrow,
+                color: Color(0xFF49495A),
+              ),
+              const Gap(3),
+              Text(
+                'Back',
+                style: theme.textTheme.displayMedium?.copyWith(
+                  fontSize: 15,
+                  color: theme.colorScheme.onSurface ,
+                ),
+              )
+            ],
           ),
         ));
   }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gaspay_mobile/core/presentation/resources/drawables.dart';
+import 'package:gaspay_mobile/core/presentation/utils/navigation_mixin.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/button.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/custom_image.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
+import 'package:gaspay_mobile/features/auth/presentation/screens/login.dart';
+import 'package:gaspay_mobile/features/auth/presentation/screens/register.dart';
 import 'package:gaspay_mobile/features/onboarding/presentation/manager/onboarding_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:gap/gap.dart';
@@ -31,7 +34,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           return Scaffold(
             body: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -54,7 +57,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         )
                       ],
                     ),
-                    const Gap(40),
+                    const Gap(55),
                     SizedBox(
                       height: 215,
                       child: PageView.builder(
@@ -99,17 +102,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     const Gap(40),
                     Button(
-                        title: 'Sign Up',
-                        onPressed: () {
-                          if (provider.isEnd()) {
-                            provider.setOnboarding();
-                            // context.pushNamedReplacement(LoginScreen.id);
-                          } else {
-                            _controller.animateToPage(provider.page + 1,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeInExpo);
-                          }
-                        }),
+                      title: 'Sign Up',
+                      onPressed: () {
+                        if (provider.isEnd()) {
+                          provider.setOnboarding();
+                          context.push(const RegisterScreen());
+                        } else {
+                          _controller.animateToPage(
+                            provider.page + 1,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInExpo,
+                          );
+                        }
+                      },
+                    ),
+                    const Gap(16),
+                    BorderButton(
+                      title: 'I already have an account',
+                      onPressed: () {
+                        context.push(const LoginScreen());
+                      },
+                    ),
                     const Gap(36),
                   ],
                 ),
