@@ -11,8 +11,10 @@ mixin AppTheme {
         onSurface: Color(0xFF002933),
         onSecondary: Color(0xFF143A43),
         primary: Color(0xFF1875F7),
-        secondary: Color(0xFFE6E6E6), // Borde
-        tertiary:  Color(0xFFF4F4F4),
+        secondary: Color(0xFFE6E6E6), // Border color
+        tertiary: Color(0xFFF4F4F4),
+        error: Color(0xFFFF3B3B), // error
+        onPrimary: Color(0xFF768589),
       ),
     ).copyWith(
         scaffoldBackgroundColor: const Color(0xffFFFFFF),
