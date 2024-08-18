@@ -9,6 +9,7 @@ import 'package:gaspay_mobile/core/presentation/widgets/pop_widget.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/provider_widget.dart';
 import 'package:gaspay_mobile/features/auth/presentation/manager/login_provider.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/register.dart';
+import 'package:gaspay_mobile/features/auth/presentation/screens/reset_password.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = '/login';
@@ -79,7 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               Clickable(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(const ResetPasswordScreen());
+                },
                 child: Text(
                   "Forgot password?",
                   style: theme.textTheme.bodyMedium?.copyWith(

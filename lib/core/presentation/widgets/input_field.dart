@@ -1,122 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:gaspay_mobile/core/presentation/resources/drawables.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/clickable.dart';
-import 'package:gaspay_mobile/core/presentation/widgets/custom_image.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/inputfield_state.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
-
-// class InputField extends TextFieldParent {
-//   const InputField(
-//       {required this.hint,
-//       super.key,
-//       required super.onChange,
-//       super.value,
-//       super.isPassword,
-//       this.prefix,
-//       this.suffix,
-//       this.readOnly = false,
-//       this.maxLines = 1,
-//       this.maxLength,
-//       this.error,
-//       this.isClear = false,
-//       this.inputType = TextInputType.text,
-//       this.inputAction = TextInputAction.done,
-//       this.minLines = 1,
-//       this.onAction});
-
-//   final String? prefix;
-//   final Widget? suffix;
-
-//   final bool readOnly;
-
-//   final int maxLines;
-//   final int? maxLength;
-//   final String? error;
-//   final String hint;
-//   final bool isClear;
-
-//   final TextInputType inputType;
-
-//   final TextInputAction inputAction;
-
-//   final VoidCallback? onAction;
-
-//   final int minLines;
-
-//   @override
-//   TextFieldState<InputField> createState() => _InputFieldState();
-// }
-
-// class _InputFieldState extends TextFieldState<InputField> {
-//   @override
-//   Widget build(BuildContext context) {
-//     final theme = Theme.of(context);
-//     return Theme(
-//         data: theme.copyWith(
-//             inputDecorationTheme: theme.inputDecorationTheme.copyWith()),
-//         child: TextFormField(
-//           controller: controller,
-//           focusNode: focus,
-//           readOnly: widget.readOnly,
-//           showCursor: true,
-//           obscureText: isPassword,
-//           maxLines: widget.maxLines,
-//           minLines: widget.minLines,
-//           maxLength: widget.maxLength,
-//           onEditingComplete: widget.onAction,
-//           textInputAction: widget.inputAction,
-//           style: theme.textTheme.labelMedium,
-//           cursorColor: theme.colorScheme.onSurface,
-//           onTapOutside: (_) {
-//             focus.unfocus();
-//           },
-//           decoration: InputDecoration(
-//             hintText: widget.hint,
-//             errorText: widget.error,
-//             labelText: widget.hint,
-//             labelStyle: theme.textTheme.labelMedium?.copyWith(
-//               fontSize: 15,
-//               color: const Color(0xff768589),
-//             ),
-//             prefixIcon: widget.prefix == null
-//                 ? null
-//                 : CustomImage(asset: widget.prefix!),
-//             suffix: widget.isPassword
-//                 ? Clickable(
-//                     onPressed: () => setState(() {
-//                       isPassword = !isPassword;
-//                     }),
-//                     child: Container(
-//                       width: 20,
-//                       height: 20,
-//                       alignment: Alignment.center,
-//                       child: Icon(
-//                         isPassword ? Icons.visibility : Icons.visibility_off,
-//                         color: theme.colorScheme.onSurface.withOpacity(0.7),
-//                         size: 20,
-//                       ),
-//                     ),
-//                   )
-//                 : widget.isClear && value.isNotEmpty
-//                     ? Clickable(
-//                         onPressed: () {
-//                           controller.clear();
-//                         },
-//                         child: SvgImage(
-//                           asset: '',
-//                           width: 24,
-//                           height: 24,
-//                           color: theme.colorScheme.onSurface.withOpacity(0.7),
-//                           fit: BoxFit.scaleDown,
-//                         ),
-//                       )
-//                     : widget.suffix,
-//           ),
-//         ));
-//   }
-// }
 
 class InputField2 extends TextFieldParent {
   const InputField2({
@@ -190,7 +77,9 @@ class _InputField2State extends TextFieldState<InputField2> {
             border: Border.all(
                 color: controller.text.isEmpty
                     ? theme.colorScheme.secondary
-                    : const Color(0xFF768589),
+                    : widget.error != null
+                        ? theme.colorScheme.error
+                        : const Color(0xFF768589),
                 width: 1),
             borderRadius: BorderRadius.circular(12),
           ),
@@ -204,12 +93,13 @@ class _InputField2State extends TextFieldState<InputField2> {
                     focusNode: focus,
                     readOnly: widget.readOnly,
                     showCursor: true,
-                    obscureText: !isPassword,
+                    obscureText: isPassword,
                     maxLines: widget.maxLines,
                     minLines: widget.minLines,
                     maxLength: widget.maxLength,
                     onEditingComplete: widget.onAction,
                     textInputAction: widget.inputAction,
+                    keyboardType: widget.inputType,
                     style: theme.textTheme.labelMedium,
                     cursorColor: theme.colorScheme.onSurface,
                     onTapOutside: (_) {
@@ -217,7 +107,13 @@ class _InputField2State extends TextFieldState<InputField2> {
                     },
                     decoration: InputDecoration(
                       hintText: '',
-                      errorText: widget.error,
+
+                      suffix: widget.suffix ??
+                          const SizedBox(
+                            width: 20,
+                            height: 20,
+                          ),
+                      // errorText: widget.error,
                       labelText: widget.hint,
                       labelStyle: theme.textTheme.labelMedium?.copyWith(
                         fontSize: 15,
@@ -246,7 +142,7 @@ class _InputField2State extends TextFieldState<InputField2> {
                           alignment: Alignment.center,
                           child: SvgImage(
                             asset:
-                                !isPassword ? icVisibilityOff : icVisibilityOn,
+                                isPassword ? icVisibilityOff : icVisibilityOn,
                             width: 20,
                             height: 20,
                             color: theme.colorScheme.onSurface.withOpacity(0.7),
@@ -277,13 +173,31 @@ class _InputField2State extends TextFieldState<InputField2> {
             ),
           ),
         ),
-        widget.error != null
-            ? Padding(
-                padding: const EdgeInsets.only(top: 0, left: 5),
-                child: Text(
-                  widget.error!,
-                ))
-            : const SizedBox(),
+        widget.isPassword
+            ? widget.error != null
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 4, left: 5),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.warning_rounded,
+                          color: theme.colorScheme.error,
+                          size: 18,
+                        ),
+                        const Gap(8),
+                        const Text(
+                          'Please follow instructions below',
+                        ),
+                      ],
+                    ))
+                : const SizedBox()
+            : widget.error != null
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 0, left: 5),
+                    child: Text(
+                      widget.error!,
+                    ))
+                : const SizedBox(),
         // widget.additionalNote != null ? const Gap(1) : const SizedBox(),
         // widget.additionalNote != null
         //     ? Text(widget.additionalNote!)

@@ -141,6 +141,9 @@ extension Validation on String {
   bool isContainLowercase() {
     return RegExp(r'^(?=.*[a-z]).+$').hasMatch(this);
   }
+  bool isNumber() {
+    return RegExp(r'^(?=.*[0-9]).+$').hasMatch(this);
+  }
 
   bool isSpecial() {
     return RegExp(r'^(?=.*[!@#$%^&*_ ]).+$').hasMatch(this);

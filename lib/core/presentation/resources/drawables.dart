@@ -5,3 +5,4 @@ const icVisibilityOn = 'assets/vectors/ic_password_on.svg';
 
 const imgOnboard1 = 'assets/images/onbd1.png';
 const imgOnboard2 = 'assets/images/onbd2.png';
+const imgMail = 'assets/images/opened_envelope.png';
