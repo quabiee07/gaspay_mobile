@@ -25,6 +25,7 @@ class InputField2 extends TextFieldParent {
     this.onAction,
     this.height = 60,
     this.width,
+    this.borderRadius,
   });
 
   final Widget? prefix;
@@ -47,6 +48,7 @@ class InputField2 extends TextFieldParent {
   final int minLines;
   final double height;
   final double? width;
+  final double? borderRadius;
 
   @override
   TextFieldState createState() => _InputField2State();
@@ -81,7 +83,7 @@ class _InputField2State extends TextFieldState<InputField2> {
                         ? theme.colorScheme.error
                         : const Color(0xFF768589),
                 width: 1),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
           ),
           child: Center(
             child: Row(
