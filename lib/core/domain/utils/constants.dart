@@ -1,6 +1,6 @@
 String accessToken = '';
 String userType = '';
-bool isLawyer = userType.contains('lawyer');
+// bool isLawyer = userType.contains('lawyer');
 
 // Shared preference keys
 String onboardingKey = 'onboarding';
