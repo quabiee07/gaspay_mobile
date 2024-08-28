@@ -16,4 +16,6 @@ class AuthState {
   String? emailError;
   String phone = '';
   String? phoneError;
+
+  String? accountType;
 }

@@ -34,4 +34,9 @@ class RegisterProvider extends CustomProvider {
         state.password.isSpecial() &&
         state.password.trim().length >= 8;
   }
+
+  setAccountType(String value) {
+    state.accountType = value;
+    notifyListeners();
+  }
 }

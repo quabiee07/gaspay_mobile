@@ -5,9 +5,11 @@ import 'package:gaspay_mobile/core/presentation/utils/custom_state.dart';
 import 'package:gaspay_mobile/core/presentation/utils/navigation_mixin.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/button.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/dialogs.dart';
+import 'package:gaspay_mobile/core/presentation/widgets/overlay_loader.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/pop_widget.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/provider_widget.dart';
 import 'package:gaspay_mobile/features/auth/presentation/manager/login_provider.dart';
+import 'package:gaspay_mobile/features/location/presentation/screens/enable_location.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
@@ -24,7 +26,7 @@ class _ConfirmPinScreenState extends CustomState<ConfirmPinScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final overlay = LoadingOverlay.of(context);
+    final overlay = LoadingOverlay.of(context);
     return ProviderWidget(
       provider: LoginProvider(),
       children: (provider, theme) {
@@ -80,20 +82,25 @@ class _ConfirmPinScreenState extends CustomState<ConfirmPinScreen> {
           Button(
             title: 'Next',
             isEnabled: true,
-            onPressed: () {
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (ctx) => SucessDialog(
-                  title: 'Instructions sent',
-                  subtitle:
-                      'We sent instructions to reset your password to brightuwaoma08@gmail.com please check both your inbox and spam.',
-                  buttonText: 'Okay!',
-                  onFinish: () {
-                    context.pop();
-                  },
-                ),
-              );
+            onPressed: () async {
+              await overlay
+                  .showAndHideLoader(Future.delayed(const Duration(seconds: 3)))
+                  .then((value) {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (ctx) => SucessDialog(
+                    title: 'Instructions sent',
+                    subtitle:
+                        'We sent instructions to reset your password to brightuwaoma08@gmail.com please check both your inbox and spam.',
+                    buttonText: 'Okay!',
+                    onFinish: () {
+                      context.pop();
+                      context.push(const EnableLocationScreen());
+                    },
+                  ),
+                );
+              });
             },
           ),
           const Gap(16),
