@@ -4,6 +4,7 @@ import 'package:gaspay_mobile/core/presentation/utils/navigation_mixin.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/button.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/custom_image.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
+import 'package:gaspay_mobile/features/auth/presentation/screens/account_type.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/login.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/register.dart';
 import 'package:gaspay_mobile/features/onboarding/presentation/manager/onboarding_provider.dart';
@@ -106,7 +107,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       onPressed: () {
                         if (provider.isEnd()) {
                           provider.setOnboarding();
-                          context.push(const RegisterScreen());
+                          context.push(const AccountTypeScreen());
                         } else {
                           _controller.animateToPage(
                             provider.page + 1,

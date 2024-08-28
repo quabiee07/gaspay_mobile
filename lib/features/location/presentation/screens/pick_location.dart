@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:gaspay_mobile/core/presentation/resources/drawables.dart';
 import 'package:gaspay_mobile/core/presentation/utils/custom_state.dart';
 import 'package:gaspay_mobile/core/presentation/utils/navigation_mixin.dart';
-import 'package:gaspay_mobile/core/presentation/utils/snack_bar_utils.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/button.dart';
-import 'package:gaspay_mobile/core/presentation/widgets/clickable.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/input_field.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/pop_widget.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/provider_widget.dart';
-import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
 import 'package:gaspay_mobile/features/location/presentation/manager/location_provider.dart';
-import 'package:gaspay_mobile/features/location/presentation/screens/enable_location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
