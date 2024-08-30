@@ -24,6 +24,7 @@ const mapIcon = "assets/images/mapIcon.svg";
 const worldIcon = "assets/images/worldIcon.svg";
 const purpleShareIcon = "assets/images/purpleShareIcon.svg";
 const smallExclamationIcon = "assets/images/smallExclamationIcon.svg";
+const starIcon = "assets/images/starIcon.svg";
 
 const imgOnboard1 = 'assets/images/onbd1.png';
 const imgOnboard2 = 'assets/images/onbd2.png';

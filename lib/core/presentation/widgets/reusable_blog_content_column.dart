@@ -56,7 +56,7 @@ class ReusableBlogContentColumn extends StatelessWidget {
             children: <TextSpan>[
               TextSpan(
                 text: blogWriteUp,
-                style:  theme.textTheme.labelSmall?.copyWith(
+                style:  theme.textTheme.labelMedium?.copyWith(
                     fontSize: 14,
                     color: theme.colorScheme.onSurface
                 ),

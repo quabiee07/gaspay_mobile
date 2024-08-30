@@ -393,12 +393,7 @@ class _BuyGasAddToCartScreenState
                   hint: 'Purchasing For',
                   onChange: (val) {},
                 ),
-                // CustomTextField(
-                //   label: 'Purchasing For',
-                //   horizontal: 16,
-                //   vertical: 19,
-                //   buttonController: _purchasingForController,
-                // ),
+
                 const SizedBox(
                   height: 16,
                 ),
@@ -406,12 +401,7 @@ class _BuyGasAddToCartScreenState
                   hint: 'From',
                   onChange: (val) {},
                 ),
-                // CustomTextField(
-                //   label: 'From',
-                //   horizontal: 16,
-                //   vertical: 19,
-                //   buttonController: _fromController,
-                // ),
+
                 const SizedBox(
                   height: 16,
                 ),
@@ -419,12 +409,6 @@ class _BuyGasAddToCartScreenState
                   hint: 'Recipient Email address',
                   onChange: (val) {},
                 ),
-                // CustomTextField(
-                //   label: 'Recipient Email address',
-                //   horizontal: 16,
-                //   vertical: 19,
-                //   buttonController: _recipientEmailAddress,
-                // ),
                 const SizedBox(
                   height: 16,
                 ),
@@ -432,12 +416,6 @@ class _BuyGasAddToCartScreenState
                   hint: 'Message (Optional)',
                   onChange: (val) {},
                 ),
-                // CustomTextField(
-                //   label: 'Message (Optional)',
-                //   horizontal: 16,
-                //   vertical: 19,
-                //   buttonController: _message,
-                // ),
                 const SizedBox(
                   height: 16,
                 ),
@@ -449,12 +427,7 @@ class _BuyGasAddToCartScreenState
                         hint: '+234',
                         onChange: (val) {},
                       ),
-                      //
-                      // CustomTextField(
-                      //   label: "+234",
-                      //   horizontal: 16,
-                      //   vertical: 19,
-                      // ),
+
                     ),
                     const SizedBox(
                       width: 4,
@@ -464,12 +437,6 @@ class _BuyGasAddToCartScreenState
                         hint: '-',
                         onChange: (val) {},
                       ),
-                      // CustomTextField(
-                      //   label: "-",
-                      //   horizontal: 16,
-                      //   vertical: 19,
-                      //   buttonController: amountController,
-                      // ),
                     ),
                   ],
                 ),

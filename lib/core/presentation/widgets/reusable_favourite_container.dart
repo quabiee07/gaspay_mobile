@@ -56,7 +56,7 @@ class ReusableFavouriteContainer extends StatelessWidget {
                 ),
               ),
               const SvgImage(
-                asset: 'heartIcon ',
+                asset: heartIcon,
               ),
             ],
           ),
@@ -79,7 +79,7 @@ class ReusableFavouriteContainer extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset("assets/images/starIcon.svg"),
+                 const  SvgImage(asset: starIcon),
                   const SizedBox(
                     width: 2,
                   ),

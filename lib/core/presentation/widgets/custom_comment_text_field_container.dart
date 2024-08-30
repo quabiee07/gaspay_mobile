@@ -29,6 +29,7 @@ class CustomCommentTextFieldContainer extends StatelessWidget {
             maxLength: 114,
             maxLines: 3,
             decoration: const InputDecoration(
+              contentPadding: EdgeInsets.zero,
               border: InputBorder.none,
               hintText: "(optional)\nE.g I will be coming with a keg",
               hintStyle: TextStyle(
