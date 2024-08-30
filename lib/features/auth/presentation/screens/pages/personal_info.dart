@@ -7,7 +7,8 @@ import 'package:gaspay_mobile/core/presentation/widgets/input_field.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/login.dart';
 
 class PersonalInfo extends StatelessWidget {
-  const PersonalInfo({super.key});
+  const PersonalInfo({super.key, required this.isCompany});
+  final bool isCompany;
 
   @override
   Widget build(BuildContext context) {
@@ -15,25 +16,37 @@ class PersonalInfo extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          InputField2(
-            hint: 'First name',
-            onChange: (value) {},
-          ),
-          const Gap(16),
-          InputField2(
-            hint: 'Last name',
-            onChange: (value) {},
-          ),
-          const Gap(16),
-          InputField2(
-            hint: 'Email address',
-            onChange: (value) {},
-          ),
-          const Gap(16),
-          InputField2(
-            hint: 'Phone number',
-            onChange: (value) {},
-          ),
+          if (isCompany) ...[
+            InputField2(
+              hint: 'Company name',
+              onChange: (value) {},
+            ),
+            const Gap(16),
+            InputField2(
+              hint: 'Company email',
+              onChange: (value) {},
+            ),
+          ] else ...[
+            InputField2(
+              hint: 'First name',
+              onChange: (value) {},
+            ),
+            const Gap(16),
+            InputField2(
+              hint: 'Last name',
+              onChange: (value) {},
+            ),
+            const Gap(16),
+            InputField2(
+              hint: 'Email address',
+              onChange: (value) {},
+            ),
+            const Gap(16),
+            InputField2(
+              hint: 'Phone number',
+              onChange: (value) {},
+            ),
+          ],
           const Gap(80),
           Button(
             title: 'Continue',
