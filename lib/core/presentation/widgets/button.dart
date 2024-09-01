@@ -94,3 +94,51 @@ class BorderButton extends StatelessWidget {
     );
   }
 }
+
+
+
+class CustomElevatedButton extends StatelessWidget {
+  const CustomElevatedButton({
+    super.key,
+    required this.label,
+    required this.onTap,
+  });
+
+  final String label;
+  final Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: ButtonStyle(
+        shadowColor: WidgetStateProperty.all(const Color(0xFF7A7A7A)),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              24,
+            ),
+          ),
+        ),
+        elevation: WidgetStateProperty.all(0),
+        backgroundColor: WidgetStateProperty.all(
+          const Color(0xFF1875F7),
+        ),
+        padding: WidgetStateProperty.all(
+          const EdgeInsets.symmetric(
+            vertical: 18,
+            horizontal: 40,
+          ),
+        ),
+      ),
+      onPressed: onTap,
+      child: Text(
+        label,
+        style: const TextStyle(
+          fontWeight: FontWeight.w700,
+          fontSize: 16,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+}
