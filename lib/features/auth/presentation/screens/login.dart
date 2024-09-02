@@ -10,9 +10,11 @@ import 'package:gaspay_mobile/core/presentation/widgets/provider_widget.dart';
 import 'package:gaspay_mobile/features/auth/presentation/manager/login_provider.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/register.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/reset_password.dart';
+import 'package:gaspay_mobile/features/bottom%20nav%20bar/presentation/screens/bottom_nav_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = '/login';
+
   const LoginScreen({super.key});
 
   @override
@@ -21,6 +23,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool rememberMe = false;
+
   @override
   Widget build(BuildContext context) {
     return ProviderWidget(
@@ -96,8 +99,14 @@ class _LoginScreenState extends State<LoginScreen> {
           const Gap(32),
           Button(
             title: 'Continue',
-            isEnabled: false,
-            onPressed: () {},
+            isEnabled: true,
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const BottomNavBar(),
+                ),
+              );
+            },
           ),
           const Gap(16),
           Center(
