@@ -9,9 +9,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i361;
-import 'package:gaspay_mobile/core/di/core_module.dart' as _i364;
+import 'package:gaspay_mobile/core/di/core_module.dart' as _i875;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:location/location.dart' as _i645;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -28,8 +29,9 @@ extension GetItInjectableX on _i174.GetIt {
     final coreModule = _$CoreModule();
     gh.factory<_i361.Dio>(() => coreModule.dio());
     gh.factoryAsync<_i460.SharedPreferences>(() => coreModule.preferences());
+    gh.factoryAsync<_i645.Location>(() => coreModule.location());
     return this;
   }
 }
 
-class _$CoreModule extends _i364.CoreModule {}
+class _$CoreModule extends _i875.CoreModule {}

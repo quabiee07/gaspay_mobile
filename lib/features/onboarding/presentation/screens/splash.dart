@@ -4,7 +4,7 @@ import 'package:gaspay_mobile/core/presentation/utils/custom_state.dart';
 import 'package:gaspay_mobile/core/presentation/utils/navigation_mixin.dart';
 import 'package:gaspay_mobile/core/presentation/utils/snack_bar_utils.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
-import 'package:gaspay_mobile/features/auth/presentation/screens/login.dart';
+import 'package:gaspay_mobile/features/auth/presentation/screens/account_type.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/register.dart';
 import 'package:gaspay_mobile/features/onboarding/presentation/manager/splash_provider.dart';
 import 'package:gaspay_mobile/features/onboarding/presentation/screens/onboarding.dart';
@@ -29,7 +29,7 @@ class _SplashScreenState extends CustomState<SplashScreen> {
       if (event == -1) {
         context.pushReplacement(const OnboardingScreen());
       } else if (event == 0) {
-        context.pushReplacement(const RegisterScreen());
+        context.pushReplacement(const AccountTypeScreen());
       } else {
         //To home
         // context.pushNamedAndClear(HomeScreen.id);

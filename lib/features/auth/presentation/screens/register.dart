@@ -20,11 +20,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final type = context.getArgs<String>();
     return ProviderWidget(
       padding: 16,
       provider: RegisterProvider(),
       children: (provider, theme) {
         _provider ??= provider;
+        final state = provider.state;
         return [
           const Gap(10),
           Row(
@@ -91,9 +93,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               onPageChanged: (value) {
                 provider.setPage(value);
               },
-              children: const [
-                PersonalInfo(),
-                SetPassword(),
+              children: [
+                PersonalInfo(
+                  isCompany: type.contains('company'),
+                ),
+                const SetPassword(),
               ],
             ),
           )

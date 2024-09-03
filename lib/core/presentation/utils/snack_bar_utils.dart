@@ -70,10 +70,10 @@ Flushbar customFlushBar(String message, [type = 1]) {
     messageText: Text(
       message,
       style: TextStyle(
-          fontFamily: 'DMSans',
-          fontWeight: FontWeight.w500,
+          color: iconColor,
+          fontFamily: 'Satoshi',
           fontSize: 18,
-          color: iconColor),
+          fontWeight: FontWeight.w500),
     ),
     messageColor: iconColor,
     icon: Icon(
