@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/custom_image.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
-
 import '../../../../core/presentation/resources/drawables.dart';
 import '../../../../core/presentation/theme/colors/colors.dart';
+import '../screens/portions/all_portion.dart';
 
 class ReusableFillingStationContainer extends StatelessWidget {
   const ReusableFillingStationContainer({
     super.key,
-    required this.location,
-    required this.status,
-    required this.rating,
     required this.onTap,
+    required this.isLikedOnTap,
+    required this.featuredBrands,
   });
 
-  final String location;
-  final String status;
-  final String rating;
+  final FeaturedBrands featuredBrands;
   final Function() onTap;
+  final VoidCallback isLikedOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -56,15 +54,15 @@ class ReusableFillingStationContainer extends StatelessWidget {
                   0.20,
                 ),
               ),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       vertical: 28,
                     ),
                     child: CustomImage(
-                      asset: bigTotalLogo,
+                      asset: featuredBrands.image,
                     ),
                   ),
                 ],
@@ -77,14 +75,21 @@ class ReusableFillingStationContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  location,
+                  featuredBrands.location,
                   style: theme.textTheme.labelMedium?.copyWith(
                     fontSize: 14,
                     color: theme.colorScheme.onSurface,
                   ),
                 ),
-                const SvgImage(
-                  asset: emptyHeartIcon,
+                GestureDetector(
+                  onTap: isLikedOnTap,
+                  child: featuredBrands.isLiked
+                      ? const SvgImage(
+                          asset: bigHeartIcon,
+                        )
+                      : const SvgImage(
+                          asset: emptyHeartIcon,
+                        ),
                 ),
               ],
             ),
@@ -94,7 +99,7 @@ class ReusableFillingStationContainer extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(status,
+                Text(featuredBrands.status,
                     style: theme.textTheme.labelSmall?.copyWith(
                       fontSize: 14,
                       color: theme.colorScheme.onSurface,
@@ -108,7 +113,7 @@ class ReusableFillingStationContainer extends StatelessWidget {
                     const SizedBox(
                       width: 2,
                     ),
-                    Text(rating,
+                    Text(featuredBrands.rating,
                         style: theme.textTheme.labelMedium?.copyWith(
                           fontSize: 12,
                           color: theme.colorScheme.onSurface,

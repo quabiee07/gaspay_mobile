@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/custom_image.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
+import 'package:gaspay_mobile/features/notification/presentation/screens/notification_screen.dart';
 import '../../../../../core/presentation/resources/drawables.dart';
 import '../../../../../core/presentation/theme/colors/colors.dart';
 import '../../../../../core/presentation/widgets/reusable_brand_container.dart';
@@ -160,8 +161,18 @@ class _HomeFragmentState extends State<HomeFragment> {
                                 const SizedBox(
                                   width: 22,
                                 ),
-                                const SvgImage(
-                                  asset: notificationIcon,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const NotificationScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: const SvgImage(
+                                    asset: notificationIcon,
+                                  ),
                                 ),
                                 const SizedBox(
                                   width: 22,

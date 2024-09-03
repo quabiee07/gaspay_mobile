@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gaspay_mobile/features/featured%20brands/presentation/screens/portions/all_portion.dart';
 
 import '../../../../featured brands/presentation/widgets/reusable_filling_station_container.dart';
 
@@ -13,8 +14,7 @@ class NearestOtFarthestPortion extends StatefulWidget {
       _NearestOtFarthestPortionState();
 }
 
-class _NearestOtFarthestPortionState
-    extends State<NearestOtFarthestPortion> {
+class _NearestOtFarthestPortionState extends State<NearestOtFarthestPortion> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,13 +27,17 @@ class _NearestOtFarthestPortionState
         children: [
           Expanded(
             child: ListView.builder(
-                itemCount: 4,
+                itemCount: FeaturedBrands.allFeatureBrand.length,
                 itemBuilder: (context, index) {
                   return ReusableFillingStationContainer(
-                    location: 'Smith Roundabout',
-                    status: '40-45 min',
-                    rating: '3,9(33)',
                     onTap: widget.reusableFillingStationContainerOnTap,
+                    isLikedOnTap: () {
+                      setState(() {
+                        FeaturedBrands.allFeatureBrand[index].isLiked =
+                            !FeaturedBrands.allFeatureBrand[index].isLiked;
+                      });
+                    },
+                    featuredBrands: FeaturedBrands.allFeatureBrand[index],
                   );
                 }),
           )

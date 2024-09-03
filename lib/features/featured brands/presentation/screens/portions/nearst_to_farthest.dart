@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gaspay_mobile/features/featured%20brands/presentation/screens/portions/all_portion.dart';
 
+import '../../../../../core/presentation/resources/drawables.dart';
+import '../../../../../core/presentation/widgets/svg_image.dart';
 import '../../widgets/reusable_filling_station_container.dart';
 
 class NearestOfFarthestPortion extends StatefulWidget {
@@ -13,8 +16,7 @@ class NearestOfFarthestPortion extends StatefulWidget {
       _NearestOfFarthestPortionState();
 }
 
-class _NearestOfFarthestPortionState
-    extends State<NearestOfFarthestPortion> {
+class _NearestOfFarthestPortionState extends State<NearestOfFarthestPortion> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,13 +29,17 @@ class _NearestOfFarthestPortionState
         children: [
           Expanded(
             child: ListView.builder(
-                itemCount: 4,
+                itemCount: FeaturedBrands.allFeatureBrand.length,
                 itemBuilder: (context, index) {
                   return ReusableFillingStationContainer(
-                    location: 'Smith Roundabout',
-                    status: '40-45 min',
-                    rating: '3,9(33)',
                     onTap: widget.reusableFillingStationContainerOnTap,
+                    isLikedOnTap: () {
+                      setState(() {
+                        FeaturedBrands.allFeatureBrand[index].isLiked =
+                            !FeaturedBrands.allFeatureBrand[index].isLiked;
+                      });
+                    },
+                    featuredBrands: FeaturedBrands.allFeatureBrand[index],
                   );
                 }),
           )
@@ -41,4 +47,6 @@ class _NearestOfFarthestPortionState
       ),
     );
   }
+
+  bool isLiked = false;
 }

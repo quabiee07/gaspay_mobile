@@ -58,16 +58,14 @@ class _FeaturedFillingStationScreenState
             const SizedBox(
               height: 20,
             ),
-             Padding(
-              padding:const  EdgeInsets.only(
+            Padding(
+              padding: const EdgeInsets.only(
                 left: 20,
               ),
               child: Text(
                 "Total Filling Station Near You",
                 style: theme.textTheme.labelLarge?.copyWith(
-                  fontSize: 14,
-                  color: theme.colorScheme.onSurface
-                ),
+                    fontSize: 14, color: theme.colorScheme.onSurface),
               ),
             ),
             const SizedBox(
@@ -87,24 +85,22 @@ class _FeaturedFillingStationScreenState
                 physics: const NeverScrollableScrollPhysics(),
                 controller: tabController,
                 labelColor: theme.colorScheme.surface,
-                unselectedLabelColor: theme.colorScheme.onSurface.withOpacity(0.50),
+                unselectedLabelColor:
+                    theme.colorScheme.onSurface.withOpacity(0.50),
                 labelStyle: theme.textTheme.labelMedium?.copyWith(
-                    fontSize: 12,
-                    color: theme.colorScheme.onSurface
-                ),
-                unselectedLabelStyle:theme.textTheme.labelMedium?.copyWith(
-                    fontSize: 12,
-                    color: theme.colorScheme.onSurface
-                ),
+                    fontSize: 12, color: theme.colorScheme.onSurface),
+                unselectedLabelStyle: theme.textTheme.labelMedium?.copyWith(
+                    fontSize: 12, color: theme.colorScheme.onSurface),
                 tabs: [
                   Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 30),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: newIndex == 0
-                            ?  blueTabBarContainerColor
-                            :  lightGrayTabBarContainerColor,),
+                      borderRadius: BorderRadius.circular(8),
+                      color: newIndex == 0
+                          ? blueTabBarContainerColor
+                          : lightGrayTabBarContainerColor,
+                    ),
                     child: const Column(
                       children: [Text("All")],
                     ),
@@ -124,13 +120,14 @@ class _FeaturedFillingStationScreenState
               ),
             ),
             Expanded(
-              child: TabBarView(controller: tabController, children: [
+              child: TabBarView(controller: tabController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
                 AllPortion(
                   reusableFillingStationContainerOnTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) =>
-                        const AddToCartScreen(),
+                        builder: (context) => const AddToCartScreen(),
                       ),
                     );
                   },
@@ -139,8 +136,7 @@ class _FeaturedFillingStationScreenState
                   reusableFillingStationContainerOnTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) =>
-                        const AddToCartScreen(),
+                        builder: (context) => const AddToCartScreen(),
                       ),
                     );
                   },

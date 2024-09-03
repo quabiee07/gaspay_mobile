@@ -172,16 +172,16 @@ class _BuyGasScreenState extends State<BuyGasScreen>
                           );
                         },
                       ),
-                      FavouritesPortion(
-                        reusableFillingStationContainerOnTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                              const BuyGasAddToCartScreen(),
-                            ),
-                          );
-                        },
-                      ),
+                      // FavouritesPortion(
+                      //   reusableFillingStationContainerOnTap: () {
+                      //     Navigator.of(context).push(
+                      //       MaterialPageRoute(
+                      //         builder: (context) =>
+                      //         const BuyGasAddToCartScreen(),
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
                       NearestOfFarthestPortion(
                         reusableFillingStationContainerOnTap: () {
                           Navigator.of(context).push(

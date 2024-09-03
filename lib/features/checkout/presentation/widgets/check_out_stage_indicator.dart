@@ -87,3 +87,68 @@ class CheckOutStageIndicator extends StatelessWidget {
     );
   }
 }
+
+
+
+// class CheckOutStageIndicator extends StatelessWidget {
+//   const CheckOutStageIndicator({
+//     super.key,
+//     required this.index,
+//     required this.position,
+//     required this.label,
+//     required this.stageLabel,
+//   });
+//
+//   final int position;
+//   final int index;
+//   final String label;
+//   final String stageLabel;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final theme = Theme.of(context);
+//     final isActive = index >= position;
+//
+//     return Column(
+//       children: [
+//         Row(
+//           children: [
+//             Expanded(
+//               child: Container(
+//                 height: 2,
+//                 color: isActive ? blueTabBarContainerColor : indicatorGray,
+//               ),
+//             ),
+//             CircleAvatar(
+//               radius: 18,
+//               backgroundColor: isActive ? blueTabBarContainerColor : indicatorGray,
+//               child: Text(
+//                 label,
+//                 style: theme.textTheme.labelLarge?.copyWith(
+//                   fontSize: 14,
+//                   color: theme.colorScheme.surface,
+//                 ),
+//               ),
+//             ),
+//             Expanded(
+//               child: Container(
+//                 height: 2,
+//                 color: isActive ? blueTabBarContainerColor : indicatorGray,
+//               ),
+//             ),
+//           ],
+//         ),
+//         const SizedBox(height: 8),
+//         Text(
+//           stageLabel,
+//           style: theme.textTheme.bodyMedium?.copyWith(
+//             fontSize: 14,
+//             color: isActive ? blueTabBarContainerColor : mediumGray2,
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+

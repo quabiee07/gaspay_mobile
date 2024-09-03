@@ -58,6 +58,10 @@ const lightGray4 = Color(0xFFF5F6F7);
 const lightGray5 = Color(0xFF002933);
 const darkYellow = Color(0xFFE15F00);
 const backGroundGray = Color(0xFFF9F8F8);
+const calenderIndicatorBlue = Color(0xFF0096CB);
+const darkBlueText = Color(0xFF1A1F36);
+const dividerGray = Color(0xFFE4E8EE);
+const gray1 = Color(0xFFA5ACB8);
 const transparent = Colors.transparent;
 
 const aiGradient2 = Color(0xFF1e1e1e);

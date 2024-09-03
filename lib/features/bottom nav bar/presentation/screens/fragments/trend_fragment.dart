@@ -93,17 +93,15 @@ class _TrendFragmentState extends State<TrendFragment> {
                           child: DropdownButton<String>(
                             underline: Container(),
                             style: theme.textTheme.labelMedium?.copyWith(
-                                fontSize: 12,
-                                color: theme.colorScheme.onSurface,
+                              fontSize: 12,
+                              color: theme.colorScheme.onSurface,
                             ),
-                            hint:  Text(
-                              "Select Brand",
-                              style: theme.textTheme.labelMedium?.copyWith(
-                                fontSize: 10,
-                                color: dropDownTextDarkGray,
-                              )
-                            ),
-                            icon:  Icon(
+                            hint: Text("Select Brand",
+                                style: theme.textTheme.labelMedium?.copyWith(
+                                  fontSize: 10,
+                                  color: dropDownTextDarkGray,
+                                )),
+                            icon: Icon(
                               Icons.keyboard_arrow_down_sharp,
                               color: theme.colorScheme.onSurface,
                             ),
@@ -130,7 +128,7 @@ class _TrendFragmentState extends State<TrendFragment> {
                     const SizedBox(
                       height: 10,
                     ),
-                     Text(
+                    Text(
                       "Total Filling Station",
                       style: theme.textTheme.labelMedium?.copyWith(
                         fontSize: 14,
@@ -142,21 +140,23 @@ class _TrendFragmentState extends State<TrendFragment> {
                       padding: const EdgeInsets.symmetric(vertical: 28),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color:  totalPink.withOpacity(
+                        color: totalPink.withOpacity(
                           0.20,
                         ),
                       ),
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CustomImage(asset: bigTotalLogo,),
+                          CustomImage(
+                            asset: bigTotalLogo,
+                          ),
                         ],
                       ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Text(
+                        Text(
                           "Current",
                           style: theme.textTheme.labelMedium?.copyWith(
                             fontSize: 12,
@@ -171,7 +171,7 @@ class _TrendFragmentState extends State<TrendFragment> {
                               ),
                             );
                           },
-                          child:  Text(
+                          child: Text(
                             "View Trends",
                             style: theme.textTheme.labelMedium?.copyWith(
                               fontSize: 12,
@@ -184,21 +184,21 @@ class _TrendFragmentState extends State<TrendFragment> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const  Row(
+                    const Row(
                       children: [
-                         Expanded(
+                        Expanded(
                           child: ReusableCurrentPriceContainer(
                             productName: "Diesel",
                             productPrice: "NGN 1,820/ltr",
-                            productStatusContainerColor:
-                            greenGainingColor,
-                            productStatusIcon:
-                                SvgImage(asset: gainIcon,),
+                            productStatusContainerColor: greenGainingColor,
+                            productStatusIcon: SvgImage(
+                              asset: gainIcon,
+                            ),
                             productStatusTextColor: darkGreen,
                             productStatusNumber: "+4.4%",
                           ),
                         ),
-                         SizedBox(
+                        SizedBox(
                           width: 8,
                         ),
                         Expanded(
@@ -206,10 +206,10 @@ class _TrendFragmentState extends State<TrendFragment> {
                             productName: 'PMS',
                             productPrice: 'NGN 820/ltr',
                             productStatusTextColor: darkGreen,
-                            productStatusIcon:
-                            SvgImage(asset: gainIcon,),
-                            productStatusContainerColor:
-                            greenGainingColor,
+                            productStatusIcon: SvgImage(
+                              asset: gainIcon,
+                            ),
+                            productStatusContainerColor: greenGainingColor,
                             productStatusNumber: "+4.4%",
                           ),
                         ),
@@ -218,21 +218,22 @@ class _TrendFragmentState extends State<TrendFragment> {
                     const SizedBox(
                       height: 16,
                     ),
-                  const   Row(
+                    const Row(
                       children: [
                         Expanded(
                           child: ReusableCurrentPriceContainer(
                             productName: "Diesel",
                             productPrice: "NGN 1,820/ltr",
                             productStatusContainerColor:
-                            redLosingBackgroundColor,
-                            productStatusIcon:
-                               SvgImage(asset: lossIcon,),
+                                redLosingBackgroundColor,
+                            productStatusIcon: SvgImage(
+                              asset: lossIcon,
+                            ),
                             productStatusTextColor: redLosingColor,
                             productStatusNumber: '-3.4%',
                           ),
                         ),
-                         SizedBox(
+                        SizedBox(
                           width: 8,
                         ),
                         Expanded(
@@ -240,10 +241,10 @@ class _TrendFragmentState extends State<TrendFragment> {
                             productName: 'PMS',
                             productPrice: 'NGN 820/ltr',
                             productStatusTextColor: darkGreen,
-                            productStatusIcon:
-                            SvgImage(asset: gainIcon,),
-                            productStatusContainerColor:
-                            greenGainingColor,
+                            productStatusIcon: SvgImage(
+                              asset: gainIcon,
+                            ),
+                            productStatusContainerColor: greenGainingColor,
                             productStatusNumber: "+4.4%",
                           ),
                         ),
@@ -265,18 +266,18 @@ class _TrendFragmentState extends State<TrendFragment> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Text(
-                      "Your Top Purchases",
-                      style: theme.textTheme.labelMedium?.copyWith(
-                        fontSize: 16,
-                        color: theme.colorScheme.onSurface,
-                      )
-                    ),
+                    Text("Your Top Purchases",
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          fontSize: 16,
+                          color: theme.colorScheme.onSurface,
+                        )),
                     const SizedBox(
                       height: 20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 20,),
+                      padding: const EdgeInsets.only(
+                        bottom: 20,
+                      ),
                       child: Center(
                         child: Wrap(
                           spacing: 16,
@@ -289,12 +290,115 @@ class _TrendFragmentState extends State<TrendFragment> {
                       child: Container(
                         color: Colors.transparent,
                         height: 200,
-                        child: PieChart(
-                          PieChartData(
-                            sections: _getSections(),
-                            sectionsSpace: 4,
-                            centerSpaceRadius: 40,
-                            borderData: FlBorderData(show: false),
+                        child: Center(
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Center(
+                                child: PieChart(
+                                  PieChartData(
+                                    sections: _getSections,
+                                    sectionsSpace: 4,
+                                    centerSpaceRadius: 40,
+                                    borderData: FlBorderData(show: false),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 30),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "[${(_getSections[0].value).toStringAsFixed(0)}%]",
+                                              style: TextStyle(
+                                                color: _getSections[0].color,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Container(
+                                              width: 30,
+                                              height: 2,
+                                              color: _getSections[0].color,
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 30,
+                                              height: 2,
+                                              color: _getSections[1].color,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              "[${(_getSections[1].value).toStringAsFixed(0)}%]",
+                                              style: TextStyle(
+                                                color: _getSections[1].color,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "[${(_getSections[2].value).toStringAsFixed(0)}%]",
+                                              style: TextStyle(
+                                                color: _getSections[2].color,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Container(
+                                              width: 30,
+                                              height: 2,
+                                              color: _getSections[2].color,
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 30,
+                                              height: 2,
+                                              color: _getSections[3].color,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              "[${(_getSections[3].value).toStringAsFixed(0)}%]",
+                                              style: TextStyle(
+                                                color: _getSections[3].color,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -315,25 +419,22 @@ class _TrendFragmentState extends State<TrendFragment> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      decoration:  BoxDecoration(
+                      decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
-                            color: theme.colorScheme.primary ,
+                            color: theme.colorScheme.primary,
                             width: 2,
                           ),
                         ),
                       ),
-                      child:  Padding(
+                      child: Padding(
                         padding: const EdgeInsets.only(
                           bottom: 2,
                         ),
-                        child: Text(
-                          "Blogs",
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            fontSize: 16,
-                            color: theme.colorScheme.primary
-                          )
-                        ),
+                        child: Text("Blogs",
+                            style: theme.textTheme.labelMedium?.copyWith(
+                                fontSize: 16,
+                                color: theme.colorScheme.primary)),
                       ),
                     ),
                     const SizedBox(
@@ -349,7 +450,7 @@ class _TrendFragmentState extends State<TrendFragment> {
                     const SizedBox(
                       height: 24,
                     ),
-                     Divider(
+                    Divider(
                       height: 1,
                       color: theme.colorScheme.secondary,
                     ),
@@ -373,23 +474,25 @@ class _TrendFragmentState extends State<TrendFragment> {
                 margin: const EdgeInsets.only(
                   bottom: 20,
                 ),
-                padding: const EdgeInsets.all(20,),
+                padding: const EdgeInsets.all(
+                  20,
+                ),
                 color: theme.colorScheme.surface,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Text(
+                    Text(
                       "Filling Stations Around You",
                       style: theme.textTheme.labelMedium?.copyWith(
-                          fontSize: 16,
-                          color: theme.colorScheme.primary
-                      ),
+                          fontSize: 16, color: theme.colorScheme.primary),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     const Center(
-                      child: CustomImage(asset: map,),
+                      child: CustomImage(
+                        asset: map,
+                      ),
                     ),
                   ],
                 ),
@@ -401,30 +504,26 @@ class _TrendFragmentState extends State<TrendFragment> {
     );
   }
 
-  List<PieChartSectionData> _getSections() {
-    return [
-      PieChartSectionData(
-        value: 40,
-        color: graphBlue,
-        showTitle: false,
-      ),
-      PieChartSectionData(
-        value: 30,
-        color: graphPurple,
-        showTitle: false,
-      ),
-      PieChartSectionData(
-        value: 20,
-        color: graphGreen,
-        showTitle: false,
-      ),
-      PieChartSectionData(
-        value: 10,
-        color: graphMint,
-        showTitle: false,
-      ),
-    ];
-  }
+  final List<PieChartSectionData> _getSections = [
+    PieChartSectionData(
+      value: 70,
+      color: graphBlue,
+      showTitle: false,
+    ),
+    PieChartSectionData(
+      value: 40,
+      color: graphPurple,
+      showTitle: false,
+    ),
+    PieChartSectionData(
+      value: 80,
+      color: graphGreen,
+      showTitle: false,
+    ),
+    PieChartSectionData(
+      value: 10,
+      color: graphMint,
+      showTitle: false,
+    ),
+  ];
 }
-
-

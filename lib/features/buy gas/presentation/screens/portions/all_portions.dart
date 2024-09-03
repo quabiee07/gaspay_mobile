@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
+import 'package:gaspay_mobile/features/featured%20brands/presentation/screens/portions/all_portion.dart';
 import '../../../../featured brands/presentation/widgets/reusable_filling_station_container.dart';
 
 class AllFragments extends StatefulWidget {
-  const AllFragments({super.key,required this.reusableFillingStationContainerOnTap});
+  const AllFragments(
+      {super.key, required this.reusableFillingStationContainerOnTap});
+
   final Function() reusableFillingStationContainerOnTap;
 
   @override
@@ -15,18 +16,26 @@ class _AllFragmentsState extends State<AllFragments> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20,left: 20,right: 20,),
+      padding: const EdgeInsets.only(
+        top: 20,
+        left: 20,
+        right: 20,
+      ),
       child: Column(
         children: [
           Expanded(
             child: ListView.builder(
-                itemCount: 4,
+                itemCount: FeaturedBrands.allFeatureBrand.length,
                 itemBuilder: (context, index) {
-                  return  ReusableFillingStationContainer(
+                  return ReusableFillingStationContainer(
                     onTap: widget.reusableFillingStationContainerOnTap,
-                    location: 'Smith Roundabout',
-                    status: '40-45 min',
-                    rating: '3,9(33)',
+                    isLikedOnTap: () {
+                      setState(() {
+                        FeaturedBrands.allFeatureBrand[index].isLiked =
+                            !FeaturedBrands.allFeatureBrand[index].isLiked;
+                      });
+                    },
+                    featuredBrands: FeaturedBrands.allFeatureBrand[index],
                   );
                 }),
           )
@@ -35,4 +44,3 @@ class _AllFragmentsState extends State<AllFragments> {
     );
   }
 }
-

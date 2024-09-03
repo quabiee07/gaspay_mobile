@@ -25,6 +25,9 @@ const worldIcon = "assets/images/worldIcon.svg";
 const purpleShareIcon = "assets/images/purpleShareIcon.svg";
 const smallExclamationIcon = "assets/images/smallExclamationIcon.svg";
 const starIcon = "assets/images/starIcon.svg";
+const bigHeartIcon = "assets/images/bigHeartIcon.svg";
+const notificationIndicator = "assets/images/notificationIndicator.svg";
+const gasPayLogo = "assets/images/gasPayLogo.svg";
 
 const imgOnboard1 = 'assets/images/onbd1.png';
 const imgOnboard2 = 'assets/images/onbd2.png';
