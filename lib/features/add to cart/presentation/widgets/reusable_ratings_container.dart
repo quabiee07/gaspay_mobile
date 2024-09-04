@@ -25,6 +25,7 @@ class ReusableRatingsContainer extends StatelessWidget {
             color: const Color(0xFFD9D9D9),
           )),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
          const  SvgImage(asset: bigStarIcon,),
           const SizedBox(

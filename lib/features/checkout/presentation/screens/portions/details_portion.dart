@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/button.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/custom_image.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
+import 'package:gaspay_mobile/features/checkout/presentation/screens/beneficiaries_screen.dart';
 import '../../../../../core/presentation/resources/drawables.dart';
 import '../../../../../core/presentation/theme/colors/colors.dart';
 import '../../../../../core/presentation/widgets/bottom_sheet_function.dart';
 import '../../../../../core/presentation/widgets/input_field.dart';
+import '../../widgets/reusable_beneficiaries_column.dart';
 import '../../widgets/reusable_summary_product_row.dart';
 
 class DetailsPortion extends StatefulWidget {
@@ -218,6 +220,60 @@ class _DetailsPortionState extends State<DetailsPortion> {
             ),
             GestureDetector(
               onTap: () {
+                vehicleDetailsBottomSheet();
+              },
+              child: Container(
+                color: transparent,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Vehicle Details",
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            fontSize: 16,
+                            color: theme.colorScheme.onSurface,
+                          ),
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios_outlined,
+                          size: 18,
+                          color: Color(
+                            0xFF49495A,
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (_purchasingForController.text.isNotEmpty)
+                      const SizedBox(
+                        height: 16,
+                      ),
+                    if (_purchasingForController.text.isNotEmpty)
+                      Text(
+                        "Sending to ${_purchasingForController.text}",
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          fontSize: 16,
+                          color: theme.colorScheme.onSurface,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            const Divider(
+              thickness: 1,
+              color: lightGrayTabBarContainerColor,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            GestureDetector(
+              onTap: () {
                 sendGiftBottomSheet();
               },
               child: Container(
@@ -379,10 +435,13 @@ class _DetailsPortionState extends State<DetailsPortion> {
                 Row(
                   children: [
                     Expanded(
-                      child: CustomElevatedButton(label: "Confirm Details", onTap: () {
-                        Navigator.pop(context);
-                        setState(() {});
-                      },),
+                      child: CustomElevatedButton(
+                        label: "Confirm Details",
+                        onTap: () {
+                          Navigator.pop(context);
+                          setState(() {});
+                        },
+                      ),
                     )
                     // Expanded(
                     //   child: ElevatedButton(
@@ -428,4 +487,177 @@ class _DetailsPortionState extends State<DetailsPortion> {
       ),
     );
   }
+
+  vehicleDetailsBottomSheet() {
+    final theme = Theme.of(context);
+    BottomSheetFunction.showCustomBottomSheet(
+      context: context,
+      color: theme.colorScheme.surface,
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.only(
+              top: 10,
+              left: 20,
+              right: 20,
+            ),
+            color: borderLightGray,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Vehicle Details",
+                  style: theme.textTheme.labelLarge?.copyWith(
+                      fontSize: 16, color: theme.colorScheme.onSurface),
+                ),
+                const Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 8),
+                      child: Column(
+                        children: [
+                          CustomImage(asset: blueCar),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Icon(
+                      Icons.close,
+                      color: blueTabBarContainerColor,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Beneficiaries",
+                      style: theme.textTheme.labelLarge!.copyWith(
+                          fontSize: 14, color: theme.colorScheme.onSurface),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const BeneficiariesScreen(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "View all",
+                        style: theme.textTheme.labelLarge!.copyWith(
+                          fontSize: 14,
+                          color: blueTabBarContainerColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 80,
+                        child: ListView.builder(
+                          itemCount: 4,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return const ReusableBeneficiariesColumn();
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                InputField2(
+                  hint: 'Driver Name',
+                  onChange: (val) {},
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                InputField2(
+                  hint: 'Car License Plate',
+                  onChange: (val) {},
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                InputField2(
+                  hint: 'Vehicle Brand',
+                  onChange: (val) {},
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                InputField2(
+                  hint: 'Vehicle Colour',
+                  onChange: (val) {},
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                SwitchListTile(
+                  title: Text(
+                    "Save Vehicle Details",
+                    style: theme.textTheme.labelLarge!.copyWith(
+                        fontSize: 16, color: theme.colorScheme.onSurface),
+                  ),
+                  activeColor: theme.colorScheme.surface,
+                  contentPadding: EdgeInsets.zero,
+                  activeTrackColor: blueTabBarContainerColor,
+                  inactiveTrackColor: darkGray1.withOpacity(0.17),
+                  inactiveThumbColor: theme.colorScheme.surface,
+                  trackOutlineColor:
+                      WidgetStateProperty.all(theme.colorScheme.surface),
+                  thumbIcon: WidgetStateProperty.all(const Icon(null)),
+                  value: isSwitch,
+                  onChanged: (value) {
+                    setState(() {
+                      isSwitch = value;
+                    });
+                  },
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomElevatedButton(
+                        label: "Confirm Details",
+                        onTap: () {
+                          Navigator.pop(context);
+                          setState(() {});
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  bool isSwitch = false;
 }
+

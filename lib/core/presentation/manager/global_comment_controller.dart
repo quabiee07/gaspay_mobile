@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-
-class GlobalCommentController{
-  static late TextEditingController globalCommentController;
-}
+// import 'package:flutter/material.dart';
+//
+// class GlobalCommentController{
+//   static late TextEditingController globalCommentController;
+// }

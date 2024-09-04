@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import '../theme/colors/colors.dart';
 
 class CustomCommentTextFieldContainer extends StatelessWidget {
-  const CustomCommentTextFieldContainer({super.key, required this.controller});
+  const CustomCommentTextFieldContainer({super.key, });
 
-  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +22,7 @@ class CustomCommentTextFieldContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextField(
-            controller: controller,
+         const  TextField(
             minLines: 1,
             maxLength: 114,
             maxLines: 3,

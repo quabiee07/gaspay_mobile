@@ -250,7 +250,6 @@ class _BuyGasAddToCartScreenState
                   height: 16,
                 ),
                 CustomCommentTextFieldContainer(
-                  controller: commentController,
                 ),
                 const SizedBox(
                   height: 16,

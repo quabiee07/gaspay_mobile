@@ -21,7 +21,7 @@ class CheckoutTransactionPinScreen extends StatefulWidget {
 class _CheckoutTransactionPinScreenState extends State<CheckoutTransactionPinScreen> {
   @override
   void dispose() {
-    GlobalCommentController.globalCommentController.dispose();
+    // GlobalCommentController.globalCommentController.dispose();
     super.dispose();
   }
   final otpFieldController = OtpFieldController();

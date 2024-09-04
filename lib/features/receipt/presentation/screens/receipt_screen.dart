@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/button.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
 import '../../../../core/domain/utils/qr_code_enums.dart';
@@ -25,7 +24,6 @@ class ReceiptScreen extends StatefulWidget {
 class _ReceiptScreenState extends State<ReceiptScreen> {
   late QrCodeSwitchStatement qrCodeSwitchStatement;
   late Widget icon;
-
 
   @override
   void initState() {
@@ -65,12 +63,14 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                   height: 20,
                 ),
                 ReusableQrCode(
-                  qrCodeBorderColor: qrCodeSwitchStatement.borderColor ,
+                  qrCodeBorderColor: qrCodeSwitchStatement.borderColor,
                   qrCodeDate: "https://example.com",
                   qrCodeSize: 200.0,
                   borderWidth: 4,
                   borderSize: 20,
-                  expiredIcon: const SvgImage(asset: exclamationIcon,),
+                  expiredIcon: const SvgImage(
+                    asset: exclamationIcon,
+                  ),
                   isQrcodeExpired: qrCodeSwitchStatement.isExpired,
                 ),
                 Container(
@@ -100,11 +100,10 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                             child: Text(
                               "This QR code expires after 72 hours and payment is nonrefundable",
                               textAlign: TextAlign.center,
-                              style:
-                                  theme.textTheme.labelMedium?.copyWith(
-                                    fontSize: 12,
-                                    color: qrCodeSwitchStatement.textColor,
-                                  ),
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                fontSize: 12,
+                                color: qrCodeSwitchStatement.textColor,
+                              ),
                             ),
                           ),
                         ],
@@ -113,15 +112,19 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(bottom: 20,),
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 22, vertical: 32,),
+                  margin: const EdgeInsets.only(
+                    bottom: 20,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 22,
+                    vertical: 32,
+                  ),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: theme.colorScheme.surface,
                       boxShadow: [
                         BoxShadow(
-                          color:lightGray3.withOpacity(0.10),
+                          color: lightGray3.withOpacity(0.10),
                           blurRadius: 10,
                           spreadRadius: 6,
                           offset: const Offset(0, 2),
@@ -134,18 +137,15 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color:lightGray4,
+                          color: lightGray4,
                         ),
-                        child:  Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               "Payment Details",
-                              style:
-                                  theme.textTheme.labelLarge?.copyWith(
-                                    fontSize: 16,
-                                    color: lightGray5
-                                  ),
+                              style: theme.textTheme.labelLarge
+                                  ?.copyWith(fontSize: 16, color: lightGray5),
                             ),
                           ],
                         ),
@@ -184,7 +184,7 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                       const SizedBox(
                         height: 32,
                       ),
-                       ReusableReceiptRow(
+                      ReusableReceiptRow(
                         isTailingText: true,
                         leadingText: 'Reference Number',
                         tailingText: 'NHDGEH-HBHB12234HHH',
@@ -193,7 +193,7 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                       const SizedBox(
                         height: 12,
                       ),
-                       ReusableReceiptRow(
+                      ReusableReceiptRow(
                         isTailingText: true,
                         leadingText: 'Sender’s Name',
                         tailingText: 'BRIGHT UWAOMA',
@@ -202,7 +202,7 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                       const SizedBox(
                         height: 12,
                       ),
-                       ReusableReceiptRow(
+                      ReusableReceiptRow(
                         isTailingText: true,
                         leadingText: 'Receiver’s Name',
                         tailingText: 'TOTAL FILLING STATION',
@@ -211,7 +211,7 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                       const SizedBox(
                         height: 12,
                       ),
-                       ReusableReceiptRow(
+                      ReusableReceiptRow(
                         isTailingText: true,
                         leadingText: 'Payment Date',
                         tailingText: 'Aug 07, 2024, 13:22:40',
@@ -220,7 +220,7 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                       const SizedBox(
                         height: 12,
                       ),
-                       ReusableReceiptRow(
+                      ReusableReceiptRow(
                         isTailingText: true,
                         leadingText: 'Payment Method',
                         tailingText: 'Credit or Debit Card',
@@ -244,9 +244,12 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child:  CustomElevatedButton(label: "Download Receipt", onTap: (){}),
+                      child: BorderButton(
+                        height: 58,
+                        title: "Download Receipt",
+                        onPressed: () {},
+                      ),
                     ),
-
                   ],
                 ),
                 const SizedBox(
@@ -255,18 +258,20 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child:
-                      CustomElevatedButton(label: "Back to HomeScreen", onTap: (){ Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const BottomNavBar(),
-                        ),
-                      );}),
-                //       Button(title: 'Back to HomeScreen', onPressed: () { Navigator.of(context).pushReplacement(
-                //   MaterialPageRoute(
-                //     builder: (context) => const BottomNavBar(),
-                //   ),
-                // ); },
-
+                      child: Button(
+                          title: "Back to HomeScreen",
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const BottomNavBar(),
+                              ),
+                            );
+                          }),
+                      //       Button(title: 'Back to HomeScreen', onPressed: () { Navigator.of(context).pushReplacement(
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const BottomNavBar(),
+                      //   ),
+                      // ); },
 
                       // CustomElevatedButton(
                       //   label: 'Back to HomeScreen',

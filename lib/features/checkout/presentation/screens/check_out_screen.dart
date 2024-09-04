@@ -135,46 +135,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       ),
                     ],
                   ),
-                  // Button(title: "Proceed", onPressed: (){
-                  //   nextPage();
-                  // }),
-                  CustomElevatedButton(label: "Proceed", onTap: (){
+                  CustomElevatedButton(
+                    label: "Proceed", onTap: (){
                     nextPage();
                   },),
-                  // ElevatedButton(
-                  //   style: ButtonStyle(
-                  //     shadowColor:
-                  //     WidgetStateProperty.all(const Color(0xFF7A7A7A)),
-                  //     shape: WidgetStateProperty.all(
-                  //       RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(
-                  //           24,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     elevation: WidgetStateProperty.all(0),
-                  //     backgroundColor: WidgetStateProperty.all(
-                  //       const Color(0xFF1875F7),
-                  //     ),
-                  //     padding: WidgetStateProperty.all(
-                  //       const EdgeInsets.symmetric(
-                  //         vertical: 18,
-                  //         horizontal: 40,
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   onPressed: () {
-                  //     nextPage();
-                  //   },
-                  //   child: const Text(
-                  //     "Proceed",
-                  //     style: TextStyle(
-                  //       fontWeight: FontWeight.w700,
-                  //       fontSize: 16,
-                  //       color: Colors.white,
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),

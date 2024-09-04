@@ -146,8 +146,6 @@ class _FuelPortionState extends State<FuelPortion> {
                               builder: (context) => CheckOutScreen(
                                 newCart: newCart,
                                 totalAmount: totalAmount,
-                                controller: GlobalCommentController
-                                    .globalCommentController,
                               ),
                             ),
                           );

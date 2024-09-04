@@ -15,6 +15,7 @@ class App extends StatelessWidget with AppTheme {
 
   @override
   Widget build(BuildContext context) {
+
     return ChangeNotifierProvider(
       create: (_) => ThemeProvider(),
       child: Consumer<ThemeProvider>(

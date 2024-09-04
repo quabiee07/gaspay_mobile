@@ -31,7 +31,6 @@ class _EngineOilPortionState extends State<EngineOilPortion> {
 
   @override
   void initState() {
-    GlobalCommentController.globalCommentController = TextEditingController();
     super.initState();
   }
 
@@ -98,7 +97,6 @@ class _EngineOilPortionState extends State<EngineOilPortion> {
                     ),
                   ),
                   CustomCommentTextFieldContainer(
-                    controller: GlobalCommentController.globalCommentController,
                   ),
                 ],
               ).animate().fadeIn(
@@ -182,8 +180,6 @@ class _EngineOilPortionState extends State<EngineOilPortion> {
                                 builder: (context) => CheckOutScreen(
                                   newCart: newCart,
                                   totalAmount: totalAmount,
-                                  controller: GlobalCommentController
-                                      .globalCommentController,
                                 ),
                               ),
                             );

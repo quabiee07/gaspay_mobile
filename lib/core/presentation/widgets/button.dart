@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../theme/colors/colors.dart';
+
 class Button extends StatelessWidget {
   const Button({
     super.key,
@@ -10,6 +12,10 @@ class Button extends StatelessWidget {
     this.isEnabled = true,
     this.width,
     this.height,
+    this.icon,
+    this.isIcon = false,
+    this.buttonColor,
+    this.verticalPadding,
   });
 
   final String title;
@@ -18,6 +24,10 @@ class Button extends StatelessWidget {
   final double? width;
   final double? height;
   final bool isEnabled;
+  final Widget? icon;
+  final bool isIcon;
+  final Color? buttonColor;
+  final double? verticalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +36,38 @@ class Button extends StatelessWidget {
       height: height ?? 58,
       width: width ?? double.infinity,
       child: ElevatedButton(
+        style: ButtonStyle(
+            shape: WidgetStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  24,
+                ),
+              ),
+            ),
+            backgroundColor: WidgetStateProperty.all(
+                buttonColor ?? blueTabBarContainerColor)),
         onPressed: isEnabled ? onPressed : null,
         child: isLoading == true
             ? CupertinoActivityIndicator(
                 color: theme.colorScheme.surface,
               )
-            : Text(
-                title,
-                style: theme.textTheme.titleLarge?.copyWith(
-                  fontSize: 14,
-                  color: theme.colorScheme.surface,
-                ),
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  icon ?? const SizedBox.shrink(),
+                  isIcon
+                      ? const SizedBox(
+                          width: 6,
+                        )
+                      : const SizedBox.shrink(),
+                  Text(
+                    title,
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontSize: 16,
+                      color: theme.colorScheme.surface,
+                    ),
+                  ),
+                ],
               ),
       ),
     );
@@ -52,6 +83,7 @@ class BorderButton extends StatelessWidget {
     this.isEnabled = true,
     this.width,
     this.height,
+    this.buttonBorderColor,
   });
 
   final String title;
@@ -60,6 +92,7 @@ class BorderButton extends StatelessWidget {
   final double? width;
   final double? height;
   final bool isEnabled;
+  final Color? buttonBorderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +105,13 @@ class BorderButton extends StatelessWidget {
         style: OutlinedButton.styleFrom(
           side: BorderSide(
             width: 1.5,
-            color: theme.colorScheme.secondary, // Border color
+            color: buttonBorderColor ??
+                theme.colorScheme.secondary, // Border color
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(28), // Circular border radius
+            borderRadius: BorderRadius.circular(
+              28,
+            ), // Circular border radius
           ),
           backgroundColor: Colors.white, // Background color
         ),
@@ -86,7 +122,7 @@ class BorderButton extends StatelessWidget {
             : Text(
                 title,
                 style: theme.textTheme.titleLarge?.copyWith(
-                  fontSize: 14,
+                  fontSize: 16,
                   color: theme.colorScheme.onSurface,
                 ),
               ),
@@ -94,8 +130,6 @@ class BorderButton extends StatelessWidget {
     );
   }
 }
-
-
 
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({

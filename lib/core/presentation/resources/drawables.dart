@@ -28,6 +28,7 @@ const starIcon = "assets/images/starIcon.svg";
 const bigHeartIcon = "assets/images/bigHeartIcon.svg";
 const notificationIndicator = "assets/images/notificationIndicator.svg";
 const gasPayLogo = "assets/images/gasPayLogo.svg";
+const questionIcon = "assets/images/questionIcon.svg";
 
 const icEnableLocation = 'assets/vectors/enable_location.svg';
 const icLocation1 = 'assets/vectors/location1.svg';
@@ -53,3 +54,5 @@ const map = 'assets/images/map.png';
 const fillingStationBlogPicture = 'assets/images/fillingStationBlogPicture.png';
 const confetti = 'assets/images/confetti.png';
 const gift = 'assets/images/gift.png';
+const blueCar = 'assets/images/blueCar.png';
+const successIcon = 'assets/images/successIcon.png';

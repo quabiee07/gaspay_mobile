@@ -151,25 +151,41 @@ class _RatingsScreenState extends State<RatingsScreen> {
                 height: 20,
               ),
               const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ReusableRatingsContainer(
-                    label: 'All',
+                  Expanded(
+                    child: ReusableRatingsContainer(
+                      label: 'All',
+                    ),
                   ),
-                  ReusableRatingsContainer(
-                    label: '1',
+                  SizedBox(width: 8,),
+                  Expanded(
+                    child: ReusableRatingsContainer(
+                      label: '1',
+                    ),
                   ),
-                  ReusableRatingsContainer(
-                    label: '2',
+                  SizedBox(width: 8,),
+                  Expanded(
+                    child: ReusableRatingsContainer(
+                      label: '2',
+                    ),
                   ),
-                  ReusableRatingsContainer(
-                    label: '3',
+                  SizedBox(width: 8,),
+                  Expanded(
+                    child: ReusableRatingsContainer(
+                      label: '3',
+                    ),
                   ),
-                  ReusableRatingsContainer(
-                    label: '4',
+                  SizedBox(width: 8,),
+                  Expanded(
+                    child: ReusableRatingsContainer(
+                      label: '4',
+                    ),
                   ),
-                  ReusableRatingsContainer(
-                    label: '5',
+                  SizedBox(width: 8,),
+                  Expanded(
+                    child: ReusableRatingsContainer(
+                      label: '5',
+                    ),
                   ),
                 ],
               ),

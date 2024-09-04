@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/custom_image.dart';
@@ -5,8 +6,12 @@ import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
 import 'package:gaspay_mobile/features/notification/presentation/screens/notification_screen.dart';
 import '../../../../../core/presentation/resources/drawables.dart';
 import '../../../../../core/presentation/theme/colors/colors.dart';
+import '../../../../../core/presentation/widgets/bottom_sheet_function.dart';
+import '../../../../../core/presentation/widgets/button.dart';
+import '../../../../../core/presentation/widgets/input_field.dart';
 import '../../../../../core/presentation/widgets/reusable_brand_container.dart';
 import '../../../../../core/presentation/widgets/reusable_favourite_container.dart';
+import '../../../../add to cart/presentation/widgets/reusable_ratings_container.dart';
 import '../../../../buy gas/presentation/screens/buy_gas_screen.dart';
 
 class HomeFragment extends StatefulWidget {
@@ -177,8 +182,13 @@ class _HomeFragmentState extends State<HomeFragment> {
                                 const SizedBox(
                                   width: 22,
                                 ),
-                                const SvgImage(
-                                  asset: filterIcon,
+                                GestureDetector(
+                                  onTap: () {
+                                    filterBottomSheet();
+                                  },
+                                  child: const SvgImage(
+                                    asset: filterIcon,
+                                  ),
                                 ),
                               ],
                             )
@@ -411,6 +421,246 @@ class _HomeFragmentState extends State<HomeFragment> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  RangeValues _currentPriceRangeValues = const RangeValues(200, 500);
+  RangeValues _currentDistanceRangeValues = const RangeValues(1, 200);
+
+  filterBottomSheet() {
+    final theme = Theme.of(context);
+    BottomSheetFunction.showCustomBottomSheet(
+      context: context,
+      color: theme.colorScheme.surface,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+           Padding(
+            padding: const EdgeInsets.only(
+              right: 20,
+              top: 20,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  onTap:(){
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(
+                    Icons.close,
+                    color: blueTabBarContainerColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: Text(
+              "Current Price Range",
+              style: theme.textTheme.labelMedium!.copyWith(
+                fontSize: 12,
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: Center(
+              child: Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.center,
+                children: [
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      trackHeight: 1,
+                    ),
+                    child: RangeSlider(
+                      inactiveColor: borderColorLightGray,
+                      activeColor: blueTabBarContainerColor,
+                      values: _currentPriceRangeValues,
+                      min: 0,
+                      max: 2000,
+                      onChanged: (RangeValues values) {
+                        setState(() {
+                          _currentPriceRangeValues = values;
+                        });
+                      },
+                    ),
+                  ),
+                  Positioned(
+                    left: (_currentPriceRangeValues.start / 2000) *
+                        (MediaQuery.of(context).size.width),
+                    bottom: -4,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        "NGN ${_currentPriceRangeValues.start.round().toString()}/ltr",
+                        style: theme.textTheme.labelMedium!.copyWith(
+                          fontSize: 10,
+                          color: theme.colorScheme.onSurface,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (_currentPriceRangeValues.end / 2000) *
+                        (MediaQuery.of(context).size.width - 80),
+                    bottom: -4,
+                    child: Text(
+                      "NGN ${_currentPriceRangeValues.end.round().toString()}/ltr",
+                      style: theme.textTheme.labelMedium!.copyWith(
+                        fontSize: 10,
+                        color: theme.colorScheme.onSurface,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: Text(
+              "Distance",
+              style: theme.textTheme.labelMedium!.copyWith(
+                fontSize: 12,
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 4, right: 4, bottom: 20),
+            child: Center(
+              child: Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.center,
+                children: [
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      trackHeight: 1,
+                    ),
+                    child: RangeSlider(
+                      inactiveColor: borderColorLightGray,
+                      activeColor: blueTabBarContainerColor,
+                      values: _currentDistanceRangeValues,
+                      min: 0,
+                      max: 200,
+                      onChanged: (RangeValues values) {
+                        setState(() {
+                          _currentDistanceRangeValues = values;
+                        });
+                      },
+                    ),
+                  ),
+                  Positioned(
+                    left: (_currentDistanceRangeValues.start / 200) *
+                        (MediaQuery.of(context).size.width),
+                    bottom: -4,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        "${_currentDistanceRangeValues.start.round().toString()} mins away",
+                        style: theme.textTheme.labelMedium!.copyWith(
+                          fontSize: 10,
+                          color: theme.colorScheme.onSurface,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (_currentDistanceRangeValues.end / 200) *
+                        (MediaQuery.of(context).size.width - 80),
+                    top: -4,
+                    child: Text(
+                      "${_currentDistanceRangeValues.end.round().toString()} mins away",
+                      style: theme.textTheme.labelMedium!.copyWith(
+                        fontSize: 10,
+                        color: theme.colorScheme.onSurface,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 12, left: 20, right: 20, bottom: 8,),
+            child: Text(
+              "Ratings",
+              style: theme.textTheme.labelMedium!.copyWith(
+                fontSize: 12,
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, bottom: 20,),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ReusableRatingsContainer(
+                    label: 'All',
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: ReusableRatingsContainer(
+                    label: '1',
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: ReusableRatingsContainer(
+                    label: '2',
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: ReusableRatingsContainer(
+                    label: '3',
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: ReusableRatingsContainer(
+                    label: '4',
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: ReusableRatingsContainer(
+                    label: '5',
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Button(
+              height: 56,
+              title: "Apply",
+              onPressed: () {},
+            ),
+          )
+        ],
       ),
     );
   }
