@@ -6,7 +6,6 @@ import 'package:gaspay_mobile/core/presentation/widgets/custom_image.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/account_type.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/login.dart';
-import 'package:gaspay_mobile/features/auth/presentation/screens/register.dart';
 import 'package:gaspay_mobile/features/onboarding/presentation/manager/onboarding_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:gap/gap.dart';

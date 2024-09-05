@@ -44,7 +44,7 @@ class ProviderWidget<T extends CustomProvider> extends StatelessWidget {
             resizeToAvoidBottomInset: resizeInsets,
             body: SafeArea(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: padding),
+                padding: EdgeInsets.only(left: padding, right: padding, top: padding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: children(provider, Theme.of(context)),

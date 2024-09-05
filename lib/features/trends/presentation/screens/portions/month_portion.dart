@@ -1,11 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:gaspay_mobile/core/presentation/resources/drawables.dart';
 
 import '../../../../../core/presentation/widgets/reusable_current_price_container.dart';
 import '../../../../bottom nav bar/presentation/widgets/legend_widgets.dart';
 import '../../../../checkout/presentation/widgets/custom_stroked_button.dart';
-
 
 class MonthPortion extends StatefulWidget {
   const MonthPortion({super.key});
@@ -52,7 +51,8 @@ class _MonthPortionState extends State<MonthPortion> {
               style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
-                color: Color(0xFF002933),),
+                color: Color(0xFF002933),
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -62,9 +62,11 @@ class _MonthPortionState extends State<MonthPortion> {
               runSpacing: 8,
               children: getLegendWidgets(),
             ),
-            const   SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Padding(
-              padding: const EdgeInsets.only(top: 20,right: 20),
+              padding: const EdgeInsets.only(top: 20, right: 20),
               child: Row(
                 children: [
                   const RotatedBox(
@@ -148,7 +150,7 @@ class _MonthPortionState extends State<MonthPortion> {
                                 FlSpot(5, 1600),
                                 FlSpot(6, 1800),
                               ],
-                              color: const Color(0xFF3377FF) ,
+                              color: const Color(0xFF3377FF),
                             ),
                             buildLineChartBarData(
                               spots: const [
@@ -160,7 +162,7 @@ class _MonthPortionState extends State<MonthPortion> {
                                 FlSpot(5, 1100),
                                 FlSpot(6, 1300),
                               ],
-                              color:const  Color(0xFFCC12DC),
+                              color: const Color(0xFFCC12DC),
                             ),
                             buildLineChartBarData(
                               spots: const [
@@ -172,7 +174,7 @@ class _MonthPortionState extends State<MonthPortion> {
                                 FlSpot(5, 900),
                                 FlSpot(6, 950),
                               ],
-                              color:  const Color(0xFF46A519),
+                              color: const Color(0xFF46A519),
                             ),
                             buildLineChartBarData(
                               spots: const [
@@ -184,7 +186,7 @@ class _MonthPortionState extends State<MonthPortion> {
                                 FlSpot(5, 600),
                                 FlSpot(6, 650),
                               ],
-                              color:const Color(0xFF0ECBA9),
+                              color: const Color(0xFF0ECBA9),
                             ),
                           ],
                           lineTouchData: LineTouchData(
@@ -225,43 +227,42 @@ class _MonthPortionState extends State<MonthPortion> {
                 ],
               ),
             ),
-            const SizedBox(height: 32,),
+            const SizedBox(
+              height: 32,
+            ),
             const Text(
               "Average Price",
               style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
-                color: Color(0xFF002933),),
+                color: Color(0xFF002933),
+              ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Row(
+            const Row(
               children: [
                 Expanded(
                   child: ReusableCurrentPriceContainer(
                     productName: "Diesel",
                     productPrice: "NGN 1,820/ltr",
-                    productStatusContainerColor:
-                    const Color(0xFFEAFFEB),
-                    productStatusIcon:
-                    SvgPicture.asset("assets/images/gainIcon.svg"),
-                    productStatusTextColor: const Color(0xFF186A04),
+                    productStatusContainerColor: Color(0xFFEAFFEB),
+                    productStatusIcon: gainIcon,
+                    productStatusTextColor: Color(0xFF186A04),
                     productStatusNumber: "+4.4%",
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 8,
                 ),
                 Expanded(
                   child: ReusableCurrentPriceContainer(
                     productName: 'PMS',
                     productPrice: 'NGN 820/ltr',
-                    productStatusTextColor: const Color(0xFF186A04),
-                    productStatusIcon:
-                    SvgPicture.asset("assets/images/gainIcon.svg"),
-                    productStatusContainerColor:
-                    const Color(0xFFEAFFEB),
+                    productStatusTextColor: Color(0xFF186A04),
+                    productStatusIcon: gainIcon,
+                    productStatusContainerColor: Color(0xFFEAFFEB),
                     productStatusNumber: "+4.4%",
                   ),
                 ),
@@ -270,32 +271,28 @@ class _MonthPortionState extends State<MonthPortion> {
             const SizedBox(
               height: 16,
             ),
-            Row(
+            const Row(
               children: [
                 Expanded(
                   child: ReusableCurrentPriceContainer(
                     productName: "Diesel",
                     productPrice: "NGN 1,820/ltr",
-                    productStatusContainerColor:
-                    const Color(0xFFFFF8EE),
-                    productStatusIcon:
-                    SvgPicture.asset("assets/images/lossIcon.svg"),
-                    productStatusTextColor: const Color(0xFFF23006),
+                    productStatusContainerColor: Color(0xFFFFF8EE),
+                    productStatusIcon: lossIcon,
+                    productStatusTextColor: Color(0xFFF23006),
                     productStatusNumber: '-3.4%',
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 8,
                 ),
                 Expanded(
                   child: ReusableCurrentPriceContainer(
                     productName: 'PMS',
                     productPrice: 'NGN 820/ltr',
-                    productStatusTextColor: const Color(0xFF186A04),
-                    productStatusIcon:
-                    SvgPicture.asset("assets/images/gainIcon.svg"),
-                    productStatusContainerColor:
-                    const Color(0xFFEAFFEB),
+                    productStatusTextColor: Color(0xFF186A04),
+                    productStatusIcon: gainIcon,
+                    productStatusContainerColor: Color(0xFFEAFFEB),
                     productStatusNumber: "+4.4%",
                   ),
                 ),

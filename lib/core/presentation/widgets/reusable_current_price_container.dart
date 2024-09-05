@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
 
 import '../theme/colors/colors.dart';
-
 
 class ReusableCurrentPriceContainer extends StatelessWidget {
   const ReusableCurrentPriceContainer({
@@ -19,16 +20,13 @@ class ReusableCurrentPriceContainer extends StatelessWidget {
   final String productStatusNumber;
   final Color productStatusContainerColor;
   final Color productStatusTextColor;
-  final Widget productStatusIcon;
+  final String productStatusIcon;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 22,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 18),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
@@ -49,14 +47,12 @@ class ReusableCurrentPriceContainer extends StatelessWidget {
         children: [
           Text(
             productName,
-            style:  theme.textTheme.labelMedium?.copyWith(
+            style: theme.textTheme.labelMedium?.copyWith(
               fontSize: 12,
               color: textDarkGray1,
             ),
           ),
-          const SizedBox(
-            height: 4,
-          ),
+          const Gap(4),
           Row(
             children: [
               Text(
@@ -66,28 +62,20 @@ class ReusableCurrentPriceContainer extends StatelessWidget {
                   color: textDarkGray2,
                 ),
               ),
-              const SizedBox(
-                width: 8,
-              ),
+              const Gap(8),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 4,
-                  vertical: 3,
-                ),
+                padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
                   color: productStatusContainerColor,
                   borderRadius: BorderRadius.circular(2),
                 ),
                 child: Row(
                   children: [
-                    productStatusIcon,
-                    const SizedBox(
-                      width: 4,
-                    ),
+                    SvgImage(asset: productStatusIcon),
+                    const Gap(2),
                     Text(
                       productStatusNumber,
-                      style:
-                      theme.textTheme.labelMedium?.copyWith(
+                      style: theme.textTheme.labelMedium?.copyWith(
                         fontSize: 8,
                         color: productStatusTextColor,
                       ),
