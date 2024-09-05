@@ -1,11 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:gaspay_mobile/core/presentation/resources/drawables.dart';
 
 import '../../../../../core/presentation/widgets/reusable_current_price_container.dart';
 import '../../../../bottom nav bar/presentation/widgets/legend_widgets.dart';
-
-
 
 class YearPortion extends StatefulWidget {
   const YearPortion({super.key});
@@ -30,17 +28,21 @@ class _YearPortionState extends State<YearPortion> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular( 10,),
+                      borderRadius: BorderRadius.circular(
+                        10,
+                      ),
                       border: Border.all(
                         width: 1,
                         color: const Color(0xFFD9D9D9),
                       )),
                   child: DropdownButton<String>(
-                    padding:const  EdgeInsets.only(left:5,right: 5,),
+                    padding: const EdgeInsets.only(
+                      left: 5,
+                      right: 5,
+                    ),
                     underline: Container(),
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
@@ -64,8 +66,7 @@ class _YearPortionState extends State<YearPortion> {
                     items: listOfYear.map<DropdownMenuItem<String>>((value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child:
-                        Text(
+                        child: Text(
                           value,
                         ),
                       );
@@ -87,7 +88,8 @@ class _YearPortionState extends State<YearPortion> {
               style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
-                color: Color(0xFF002933),),
+                color: Color(0xFF002933),
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -97,9 +99,11 @@ class _YearPortionState extends State<YearPortion> {
               runSpacing: 8,
               children: getLegendWidgets(),
             ),
-            const   SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Padding(
-              padding: const EdgeInsets.only(top: 20,right: 20),
+              padding: const EdgeInsets.only(top: 20, right: 20),
               child: Row(
                 children: [
                   const RotatedBox(
@@ -183,7 +187,7 @@ class _YearPortionState extends State<YearPortion> {
                                 FlSpot(5, 1600),
                                 FlSpot(6, 1800),
                               ],
-                              color: const Color(0xFF3377FF) ,
+                              color: const Color(0xFF3377FF),
                             ),
                             buildLineChartBarData(
                               spots: const [
@@ -195,7 +199,7 @@ class _YearPortionState extends State<YearPortion> {
                                 FlSpot(5, 1100),
                                 FlSpot(6, 1300),
                               ],
-                              color:const  Color(0xFFCC12DC),
+                              color: const Color(0xFFCC12DC),
                             ),
                             buildLineChartBarData(
                               spots: const [
@@ -207,7 +211,7 @@ class _YearPortionState extends State<YearPortion> {
                                 FlSpot(5, 900),
                                 FlSpot(6, 950),
                               ],
-                              color:  const Color(0xFF46A519),
+                              color: const Color(0xFF46A519),
                             ),
                             buildLineChartBarData(
                               spots: const [
@@ -219,7 +223,7 @@ class _YearPortionState extends State<YearPortion> {
                                 FlSpot(5, 600),
                                 FlSpot(6, 650),
                               ],
-                              color:const Color(0xFF0ECBA9),
+                              color: const Color(0xFF0ECBA9),
                             ),
                           ],
                           lineTouchData: LineTouchData(
@@ -260,43 +264,42 @@ class _YearPortionState extends State<YearPortion> {
                 ],
               ),
             ),
-            const SizedBox(height: 32,),
+            const SizedBox(
+              height: 32,
+            ),
             const Text(
               "Average Price",
               style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
-                color: Color(0xFF002933),),
+                color: Color(0xFF002933),
+              ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Row(
+            const Row(
               children: [
                 Expanded(
                   child: ReusableCurrentPriceContainer(
                     productName: "Diesel",
                     productPrice: "NGN 1,820/ltr",
-                    productStatusContainerColor:
-                    const Color(0xFFEAFFEB),
-                    productStatusIcon:
-                    SvgPicture.asset("assets/images/gainIcon.svg"),
-                    productStatusTextColor: const Color(0xFF186A04),
+                    productStatusContainerColor: Color(0xFFEAFFEB),
+                    productStatusIcon: gainIcon,
+                    productStatusTextColor: Color(0xFF186A04),
                     productStatusNumber: "+4.4%",
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 8,
                 ),
                 Expanded(
                   child: ReusableCurrentPriceContainer(
                     productName: 'PMS',
                     productPrice: 'NGN 820/ltr',
-                    productStatusTextColor: const Color(0xFF186A04),
-                    productStatusIcon:
-                    SvgPicture.asset("assets/images/gainIcon.svg"),
-                    productStatusContainerColor:
-                    const Color(0xFFEAFFEB),
+                    productStatusTextColor: Color(0xFF186A04),
+                    productStatusIcon: gainIcon,
+                    productStatusContainerColor: Color(0xFFEAFFEB),
                     productStatusNumber: "+4.4%",
                   ),
                 ),
@@ -305,32 +308,28 @@ class _YearPortionState extends State<YearPortion> {
             const SizedBox(
               height: 16,
             ),
-            Row(
+            const Row(
               children: [
                 Expanded(
                   child: ReusableCurrentPriceContainer(
                     productName: "Diesel",
                     productPrice: "NGN 1,820/ltr",
-                    productStatusContainerColor:
-                    const Color(0xFFFFF8EE),
-                    productStatusIcon:
-                    SvgPicture.asset("assets/images/lossIcon.svg"),
-                    productStatusTextColor: const Color(0xFFF23006),
+                    productStatusContainerColor: Color(0xFFFFF8EE),
+                    productStatusIcon: lossIcon,
+                    productStatusTextColor: Color(0xFFF23006),
                     productStatusNumber: '-3.4%',
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 8,
                 ),
                 Expanded(
                   child: ReusableCurrentPriceContainer(
                     productName: 'PMS',
                     productPrice: 'NGN 820/ltr',
-                    productStatusTextColor: const Color(0xFF186A04),
-                    productStatusIcon:
-                    SvgPicture.asset("assets/images/gainIcon.svg"),
-                    productStatusContainerColor:
-                    const Color(0xFFEAFFEB),
+                    productStatusTextColor: Color(0xFF186A04),
+                    productStatusIcon: gainIcon,
+                    productStatusContainerColor: Color(0xFFEAFFEB),
                     productStatusNumber: "+4.4%",
                   ),
                 ),
@@ -341,6 +340,7 @@ class _YearPortionState extends State<YearPortion> {
       ),
     );
   }
+
   LineChartBarData buildLineChartBarData({
     required List<FlSpot> spots,
     required Color color,
@@ -384,4 +384,3 @@ class _YearPortionState extends State<YearPortion> {
     );
   }
 }
-

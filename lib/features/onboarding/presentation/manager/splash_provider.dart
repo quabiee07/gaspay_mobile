@@ -1,5 +1,5 @@
 import 'package:gaspay_mobile/core/di/core_module_container.dart';
-import 'package:gaspay_mobile/core/domain/utils/utils.dart';
+import 'package:gaspay_mobile/core/domain/utils/constants.dart';
 import 'package:gaspay_mobile/core/presentation/manager/custom_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
