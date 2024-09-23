@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'fragments/home_fragment.dart';
 import '../../../loan/presentation/screens/loans_fragment.dart';
 import 'fragments/order_fragment.dart';
-import 'fragments/profile_fragment.dart';
+import '../../../profile/presentation/screens/profile_fragment.dart';
 import 'fragments/trend_fragment.dart';
 
 
