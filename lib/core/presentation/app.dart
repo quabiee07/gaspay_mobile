@@ -6,6 +6,7 @@ import 'package:gaspay_mobile/core/presentation/utils/custom_state.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/login.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/register.dart';
 import 'package:gaspay_mobile/features/auth/presentation/screens/reset_password.dart';
+import 'package:gaspay_mobile/features/loan/presentation/screens/loan_dashboard.dart';
 import 'package:gaspay_mobile/features/onboarding/presentation/screens/onboarding.dart';
 import 'package:gaspay_mobile/features/onboarding/presentation/screens/splash.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +44,8 @@ class App extends StatelessWidget with AppTheme {
                 LoginScreen.id: (context) => const LoginScreen(),
                 ResetPasswordScreen.id: (context) =>
                     const ResetPasswordScreen(),
+                LoansDashboardScreen.id: (context) =>
+                    const LoansDashboardScreen()
               },
             ),
           );

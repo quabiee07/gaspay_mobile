@@ -59,8 +59,7 @@ const lightGray5 = Color(0xFF002933);
 const darkYellow = Color(0xFFE15F00);
 const backGroundGray = Color(0xFFF9F8F8);
 const transparent = Colors.transparent;
+const loanBg = Color(0xFFEFF5FF);
+const loanFg = Color(0xFFFEF3EE);
 
-const aiGradient2 = Color(0xFF1e1e1e);
-const textAccentLight = Color(0xFF1e1e1e);
-const textAccentDark = Color(0xFF1e1e1e);
-const subBlue = Color(0xFF1e1e1e);
+const cardTop =  Color(0xFFE7E9F3);

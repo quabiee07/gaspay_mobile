@@ -3,7 +3,7 @@ import 'package:gaspay_mobile/core/presentation/manager/custom_provider.dart';
 import 'package:gaspay_mobile/features/auth/presentation/manager/auth_state.dart';
 
 class RegisterProvider extends CustomProvider {
-  var state = AuthState();
+  var state = AuthState();  
   RegisterProvider();
 
   int page = 0;

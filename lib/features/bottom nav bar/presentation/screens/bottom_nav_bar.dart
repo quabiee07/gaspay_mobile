@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'fragments/home_fragment.dart';
-import 'fragments/loans_fragment.dart';
+import '../../../loan/presentation/screens/loans_fragment.dart';
 import 'fragments/order_fragment.dart';
 import 'fragments/profile_fragment.dart';
 import 'fragments/trend_fragment.dart';
@@ -52,7 +52,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           fontSize: 12,
         ),
         showUnselectedLabels: true,
-        items: <BottomNavigationBarItem>[
+        items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset("assets/images/inActiveHomeIcon.svg"),
             activeIcon: SvgPicture.asset("assets/images/activeHomeIcon.svg"),

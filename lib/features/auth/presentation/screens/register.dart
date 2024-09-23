@@ -26,7 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       provider: RegisterProvider(),
       children: (provider, theme) {
         _provider ??= provider;
-        final state = provider.state;
+        // final state = provider.state;
         return [
           const Gap(10),
           Row(
