@@ -84,7 +84,7 @@ mixin AppTheme {
       colorScheme: const ColorScheme.dark(
         surface: Color(0xff010101),
         onSurface: textColorDark,
-        tertiary: textAccentDark,
+        // tertiary: textAccentDark,
         secondary: walletTopDark,
       ),
     ).copyWith(

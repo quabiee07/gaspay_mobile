@@ -4,6 +4,7 @@ String userType = '';
 
 // Shared preference keys
 String onboardingKey = 'onboarding';
+String loanOnboardingKey = 'loan-onboarding';
 String tokenKey = 'token';
 String userRoleKey = 'user-role';
 String user = 'user';

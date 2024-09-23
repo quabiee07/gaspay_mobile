@@ -31,7 +31,6 @@ const icLocation1 = 'assets/vectors/location1.svg';
 const icLocation2 = 'assets/vectors/location2.svg';
 const icLocation3 = 'assets/vectors/location3.svg';
 
-
 const imgOnboard1 = 'assets/images/onbd1.png';
 const imgOnboard2 = 'assets/images/onbd2.png';
 const imgMail = 'assets/images/opened_envelope.png';
@@ -50,3 +49,7 @@ const map = 'assets/images/map.png';
 const fillingStationBlogPicture = 'assets/images/fillingStationBlogPicture.png';
 const confetti = 'assets/images/confetti.png';
 const gift = 'assets/images/gift.png';
+const loanPic = 'assets/vectors/loanBg.svg';
+const cardPic = 'assets/vectors/ic_card.svg';
+const checkMark = 'assets/images/check_mark.png';
+const idCard = 'assets/images/id_card.png';

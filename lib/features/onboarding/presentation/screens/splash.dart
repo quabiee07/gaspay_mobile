@@ -39,8 +39,8 @@ class _SplashScreenState extends CustomState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //NOTE: Instead of of doing this, refer to the [ProviderWidget]
     final theme = Theme.of(context);
+    //NOTE: Instead of of doing this, refer to the [ProviderWidget]
     return ChangeNotifierProvider(
       create: (_) => SplashProvider(),
       child: Consumer<SplashProvider>(

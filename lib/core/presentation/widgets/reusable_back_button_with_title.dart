@@ -8,7 +8,7 @@ class ReusableBackButtonWithTitle extends StatelessWidget {
     required this.isText,
     required this.title,
     this.suffixWidget,
-    required this.onTap,
+    this.onTap,
     required this.isBackIconVisible,
     this.prefixWidget,
   });
@@ -17,41 +17,47 @@ class ReusableBackButtonWithTitle extends StatelessWidget {
   final bool isText;
   final Widget? suffixWidget;
   final Widget? prefixWidget;
-  final Function() onTap;
+  final Function()? onTap;
   final bool isBackIconVisible;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Stack(
+      alignment: Alignment.center,
       children: [
-        isBackIconVisible ? const PopWidget() : const SizedBox(),
-        isText
-            ? Text(
-                title,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.labelLarge?.copyWith(
-                  fontSize: 16,
-                  color: theme.colorScheme.onSurface,
-                ),
-              )
-            : const SizedBox(),
-        suffixWidget == null
-            ? Visibility(
-                visible: false,
-                maintainSize: true,
-                maintainAnimation: true,
-                maintainInteractivity: true,
-                maintainSemantics: true,
-                maintainState: true,
-                child: PopWidget(
-                  callback: () {
-                    context.pop();
-                  },
-                ),
-              )
-            : suffixWidget!,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            isBackIconVisible
+                ? PopWidget(
+                    callback: () {
+                      context.pop();
+                    },
+                  )
+                : const SizedBox(),
+          ],
+        ),
+        Center(
+          child: isText
+              ? Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    fontSize: 16,
+                    color: theme.colorScheme.onSurface,
+                  ),
+                )
+              : const SizedBox(),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            suffixWidget ??
+                const SizedBox(
+                    width: 48), // Reserve space if suffixWidget is null
+          ],
+        ),
       ],
     );
   }
