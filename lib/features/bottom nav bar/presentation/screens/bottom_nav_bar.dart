@@ -7,8 +7,6 @@ import 'fragments/order_fragment.dart';
 import 'fragments/profile_fragment.dart';
 import 'fragments/trend_fragment.dart';
 
-
-
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
 
@@ -32,6 +30,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +40,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         type: BottomNavigationBarType.fixed,
         onTap: onTap,
         currentIndex: currentIndex,
-        selectedItemColor:const Color(0xFF1875F7),
+        selectedItemColor: const Color(0xFF1875F7),
         showSelectedLabels: true,
         unselectedLabelStyle: const TextStyle(
           fontSize: 12,
@@ -69,6 +69,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: "Trend",
           ),
           BottomNavigationBarItem(
+            key: loanKey,
             icon: SvgPicture.asset("assets/images/inActiveLoansIcon.svg"),
             activeIcon: SvgPicture.asset("assets/images/activeLoansIcon.svg"),
             label: "Loans",

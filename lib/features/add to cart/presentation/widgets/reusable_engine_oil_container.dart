@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gaspay_mobile/features/checkout/presentation/screens/check_out_screen.dart';
 import '../../../../core/presentation/theme/colors/colors.dart';
-import '../screens/portions/engine_oil_portion.dart';
 
 class ReusableEngineOilContainer extends StatelessWidget {
   const ReusableEngineOilContainer({
@@ -11,7 +11,7 @@ class ReusableEngineOilContainer extends StatelessWidget {
     required this.removeQuantity,
   });
 
-  final EngineProduct product;
+  final Product product;
   final VoidCallback addToCart;
   final VoidCallback addQuantity;
   final VoidCallback removeQuantity;
@@ -33,7 +33,7 @@ class ReusableEngineOilContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(
-                product.image,
+                product.image??"",
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

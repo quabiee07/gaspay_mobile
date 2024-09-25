@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 import '../theme/colors/colors.dart';
 
 class CustomCommentTextFieldContainer extends StatelessWidget {
-  const CustomCommentTextFieldContainer({super.key, });
+  const CustomCommentTextFieldContainer({
+    super.key,
+    required this.commentController,
+    required this.onChange,
+    required this.focusNode,
+  });
 
+  final TextEditingController commentController;
+  final Function(String) onChange;
+  final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +30,10 @@ class CustomCommentTextFieldContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-         const  TextField(
+          TextField(
+            focusNode: focusNode,
+            onChanged: onChange,
+            controller: commentController,
             minLines: 1,
             maxLength: 114,
             maxLines: 3,

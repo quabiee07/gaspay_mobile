@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/theme/colors/colors.dart';
-import '../screens/portions/fuel_portion.dart';
+import '../../../checkout/presentation/screens/check_out_screen.dart';
 
 class ReusableFuelContainer extends StatelessWidget {
   const ReusableFuelContainer({
@@ -34,7 +34,7 @@ class ReusableFuelContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(
-                product.image,
+                product.image??"",
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

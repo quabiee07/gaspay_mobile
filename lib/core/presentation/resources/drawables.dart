@@ -29,6 +29,7 @@ const bigHeartIcon = "assets/images/bigHeartIcon.svg";
 const notificationIndicator = "assets/images/notificationIndicator.svg";
 const gasPayLogo = "assets/images/gasPayLogo.svg";
 const questionIcon = "assets/images/questionIcon.svg";
+const whiteArchiveIcon = "assets/images/whiteArchiveIcon.svg";
 
 const icEnableLocation = 'assets/vectors/enable_location.svg';
 const icLocation1 = 'assets/vectors/location1.svg';

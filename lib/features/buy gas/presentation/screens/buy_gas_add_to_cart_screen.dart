@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gaspay_mobile/core/presentation/widgets/custom_image.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/input_field.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
+import 'package:provider/provider.dart';
+import '../../../../core/presentation/manager/comment_provider.dart';
 import '../../../../core/presentation/resources/drawables.dart';
 import '../../../../core/presentation/widgets/bottom_sheet_function.dart';
 import '../../../../core/presentation/widgets/button.dart';
 import '../../../../core/presentation/widgets/custom_comment_text_field_container.dart';
 import '../../../../core/presentation/widgets/reusable_back_button_with_title.dart';
+import '../../../add to cart/presentation/manager/add_to_cart_list_provider.dart';
 import '../../../add to cart/presentation/screens/featured_filling_station_see_more_screen.dart';
-import '../../../add to cart/presentation/screens/portions/engine_oil_portion.dart';
 import '../../../add to cart/presentation/widgets/reusable_horizontal_divider.dart';
 import '../../../checkout/presentation/screens/check_out_screen.dart';
 import '../widgets/reusable_gas_purchase_container.dart';
@@ -18,24 +19,50 @@ class BuyGasAddToCartScreen extends StatefulWidget {
   const BuyGasAddToCartScreen({super.key});
 
   @override
-  State<BuyGasAddToCartScreen> createState() =>
-      _BuyGasAddToCartScreenState();
+  State<BuyGasAddToCartScreen> createState() => _BuyGasAddToCartScreenState();
 }
 
-class _BuyGasAddToCartScreenState
-    extends State<BuyGasAddToCartScreen> {
+class _BuyGasAddToCartScreenState extends State<BuyGasAddToCartScreen> {
   bool isSearching = false;
-  TextEditingController quantityController = TextEditingController();
-  TextEditingController amountController = TextEditingController();
-  TextEditingController commentController = TextEditingController();
-  final TextEditingController _purchasingForController =
-      TextEditingController();
-  final TextEditingController _fromController = TextEditingController();
-  final TextEditingController _recipientEmailAddress = TextEditingController();
-  final TextEditingController _message = TextEditingController();
+  late FocusNode _focusNode;
+  late TextEditingController commentController2;
+  Product? selectedProduct;
+  String quantity = "0";
+  double totalAmount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    final commentProvider =
+        Provider.of<CommentsProvider>(context, listen: false);
+    commentController2 =
+        TextEditingController(text: commentProvider.commentAddToCart2);
+    _focusNode = FocusNode();
+  }
+
+ int getInt(String value){
+    try{
+     return int.parse(value);
+    }
+    catch(e){
+    return  0;
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focusNode.dispose();
+    commentController2.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final commentProvider = Provider.of<CommentsProvider>(context);
+    final cartProvider = Provider.of<AddToCartListProvider>(context);
+    List<Product> petroleumProduct = Product.allProducts
+        .where((product) => product.category == 'Petroleum Product')
+        .toList();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -50,6 +77,7 @@ class _BuyGasAddToCartScreenState
                   title: "Total Filling Station",
                   isText: true,
                   onTap: () {
+                    cartProvider.clearCart();
                     Navigator.pop(context);
                   },
                 ),
@@ -170,36 +198,56 @@ class _BuyGasAddToCartScreenState
                       0.20,
                     ),
                   ),
-                  child:  Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Image.asset(bigTotalLogo)
-                    ],
+                    children: [Image.asset(bigTotalLogo)],
                   ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ReusableGasPurchaseContainer(
-                      product: "PMS",
-                      amount: 800,
-                    ),
-                    ReusableGasPurchaseContainer(
-                      product: "Diesel",
-                      amount: 1200,
-                    ),
-                    ReusableGasPurchaseContainer(
-                      product: "Kerosene",
-                      amount: 1200,
-                    ),
-                    ReusableGasPurchaseContainer(
-                      product: "Cooking Gas",
-                      amount: 1200,
-                    ),
-                  ],
+                SizedBox(
+                  height: 65,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount:
+                                petroleumProduct.length,
+                            itemBuilder: (context, index) {
+                              final product =
+                                  petroleumProduct[index];
+                              return GestureDetector(
+                                onTap: () {
+
+                                  setState(() {
+                                    selectedProduct = product;
+                                    quantity = '1';
+                                    totalAmount =
+                                        cartProvider.calculateTotalAmount(
+                                            product, getInt(quantity));
+                                  });
+                                  for (var p in petroleumProduct) {
+                                    p.addedToCart = false;
+                                  }
+                                   product.addedToCart = true;
+
+                                   cartProvider.addItem2(
+                                       selectedProduct, getInt(quantity));
+
+                                  cartProvider.notifyListeners();
+                                  selectedProduct = product;
+                                  // });
+                                },
+                                child: ReusableGasPurchaseContainer(
+                                  product: product,
+                                ),
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
@@ -209,30 +257,40 @@ class _BuyGasAddToCartScreenState
                     SizedBox(
                         width: 120,
                         child: InputField2(
-                          hint: '-',
-                          onChange: (val) {},
-                        )
-                        // CustomTextField(
-                        //   label: "-",
-                        //   horizontal: 10,
-                        //   vertical: 10,
-                        //   buttonController: quantityController,
-                        // ),
-                        ),
+                            hint: '-',
+                            inputType: TextInputType.number,
+                            onChange: (val) {
+                              setState(() {
+                                if (val.isEmpty ||
+                                    int.tryParse(val) == null ||
+                                    int.parse(val) <= 0) {
+                                  quantity = "1";
+                                } else {
+                                  quantity = val;
+                                }
+                                if (selectedProduct != null) {
+                                  totalAmount =
+                                      cartProvider.calculateTotalAmount(
+                                          selectedProduct!,
+                                          int.parse(quantity));
+                                  cartProvider.addItem2(
+                                      selectedProduct!, int.parse(quantity));
+                                }
+                              });
+                            })),
                     const SizedBox(
                       width: 4,
                     ),
-                    Expanded(
-                      child: InputField2(
-                        hint: '-',
-                        onChange: (val) {},
-                      ),
-                      // CustomTextField(
-                      //   label: "-",
-                      //   horizontal: 10,
-                      //   vertical: 10,
-                      //   buttonController: amountController,
-                      // ),
+                    Consumer<AddToCartListProvider>(
+                      builder: (context, provider, child) {
+                        return Expanded(
+                          child: InputField2(
+                            readOnly: true,
+                            hint: totalAmount.toStringAsFixed(1),
+                            onChange: (val) {},
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -242,14 +300,20 @@ class _BuyGasAddToCartScreenState
                 const Text(
                   "Comment",
                   style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16,
-                      color: Color(0xFF002933)),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                    color: Color(0xFF002933),
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
                 CustomCommentTextFieldContainer(
+                  commentController: commentController2,
+                  onChange: (newComment) {
+                    commentProvider.updateCommentFromCart2(newComment);
+                  },
+                  focusNode: _focusNode,
                 ),
                 const SizedBox(
                   height: 16,
@@ -273,9 +337,10 @@ class _BuyGasAddToCartScreenState
                         Text(
                           "Send as Gift",
                           style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              color: Color(0xFF002933)),
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                            color: Color(0xFF002933),
+                          ),
                         ),
                         Icon(
                           Icons.arrow_forward_ios_outlined,
@@ -299,29 +364,30 @@ class _BuyGasAddToCartScreenState
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 20),
+                  padding: const EdgeInsets.only(
+                    top: 20,
+                    bottom: 20,
+                  ),
                   child: Row(
                     children: [
                       Expanded(
                           child: Button(
                         title: 'Proceed',
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => CheckOutScreen(
-                                  newCart: newCart, totalAmount: totalAmount),
-                            ),
-                          );
+                          if (selectedProduct != null) {
+                            Provider.of<CommentsProvider>(context,
+                                    listen: false)
+                                .setCheckoutCommentFromCart(2);
+                            cartProvider.addItem2(
+                                selectedProduct!, int.parse(quantity));
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const CheckOutScreen(),
+                              ),
+                            );
+                          }
                         },
-                      )
-                          // CustomElevatedButton(
-                          //   label: 'Proceed',
-                          //   onTap: () {
-                          //     Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CheckOutScreen(
-                          //         newCart: newCart, totalAmount: totalAmount),),);
-                          //   },
-                          // ),
-                          ),
+                      )),
                     ],
                   ),
                 ),
@@ -332,9 +398,6 @@ class _BuyGasAddToCartScreenState
       ),
     );
   }
-
-  List<EngineProduct> newCart = [];
-  double totalAmount = 0;
 
   sendGiftBottomSheet() {
     BottomSheetFunction.showCustomBottomSheet(
@@ -392,7 +455,6 @@ class _BuyGasAddToCartScreenState
                   hint: 'Purchasing For',
                   onChange: (val) {},
                 ),
-
                 const SizedBox(
                   height: 16,
                 ),
@@ -400,7 +462,6 @@ class _BuyGasAddToCartScreenState
                   hint: 'From',
                   onChange: (val) {},
                 ),
-
                 const SizedBox(
                   height: 16,
                 ),
@@ -426,7 +487,6 @@ class _BuyGasAddToCartScreenState
                         hint: '+234',
                         onChange: (val) {},
                       ),
-
                     ),
                     const SizedBox(
                       width: 4,
@@ -448,11 +508,7 @@ class _BuyGasAddToCartScreenState
                         child: Button(
                       title: 'Confirm Details',
                       onPressed: () {},
-                    )
-                        // CustomElevatedButton(
-                        //   label: "Confirm Details", onTap: () {},
-                        // ),
-                        ),
+                    )),
                   ],
                 ),
                 const SizedBox(
@@ -466,3 +522,4 @@ class _BuyGasAddToCartScreenState
     );
   }
 }
+

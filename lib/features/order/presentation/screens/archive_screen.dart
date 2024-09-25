@@ -1,35 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../../core/domain/utils/qr_code_enums.dart';
-import '../../../../../core/presentation/resources/drawables.dart';
-import '../../../../../core/presentation/theme/colors/colors.dart';
-import '../../../../../core/presentation/widgets/svg_image.dart';
-import '../../../../receipt/presentation/screens/receipt_screen.dart';
-import '../../widgets/reusable_order_qr_code_row.dart';
+import '../../../../core/domain/utils/qr_code_enums.dart';
+import '../../../../core/presentation/resources/drawables.dart';
+import '../../../../core/presentation/theme/colors/colors.dart';
+import '../../../../core/presentation/widgets/reusable_back_button_with_title.dart';
+import '../../../../core/presentation/widgets/svg_image.dart';
+import '../../../receipt/presentation/screens/receipt_screen.dart';
+import '../widgets/reusable_order_qr_code_row.dart';
 
-class RedeemedPortion extends StatefulWidget {
-  const RedeemedPortion({super.key});
+
+class ArchiveScreen extends StatefulWidget {
+  const ArchiveScreen({super.key,});
 
   @override
-  State<RedeemedPortion> createState() => _RedeemedPortionState();
+  State<ArchiveScreen> createState() => _ArchiveScreenState();
 }
 
-class _RedeemedPortionState extends State<RedeemedPortion> {
+class _ArchiveScreenState extends State<ArchiveScreen> {
   final List<String> items = List.generate(10, (index) => 'Item ${index + 1}');
   double swipeProgress = 0.0;
+
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Padding(
+    return  Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      body: SafeArea(
+        child: Padding(
       padding: const EdgeInsets.only(
-        top: 20,
+      top: 20,
         left: 20,
         right: 20,
       ),
       child: Column(
         children: [
+          ReusableBackButtonWithTitle(
+            isBackIconVisible: true,
+            prefixWidget: const SizedBox.shrink(),
+            isText: true,
+            title: "QR Code",
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          const SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: ListView.builder(
                 itemCount: 10,
@@ -65,9 +83,9 @@ class _RedeemedPortionState extends State<RedeemedPortion> {
                                       10,
                                     ),
                                     Text(
-                                      "Archive",
+                                      "Unarchive",
                                       style:
-                                          theme.textTheme.labelMedium!.copyWith(
+                                      theme.textTheme.labelMedium!.copyWith(
                                         fontSize: 12,
                                         color: theme.colorScheme.surface,
                                       ),
@@ -105,7 +123,7 @@ class _RedeemedPortionState extends State<RedeemedPortion> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => const ReceiptScreen(
-                                  qrCodeState: QrCodeState.redeemed,
+                                  qrCodeState: QrCodeState.expired,
                                 ),
                               ),
                             );
@@ -127,6 +145,8 @@ class _RedeemedPortionState extends State<RedeemedPortion> {
                 }),
           )
         ],
+      ),
+    ),
       ),
     );
   }

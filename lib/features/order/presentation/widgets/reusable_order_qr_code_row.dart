@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
-
 import '../../../../core/presentation/resources/drawables.dart';
 import '../../../receipt/presentation/widgets/reusable_qr_code.dart';
-
 
 class ReusableOrderQrCodeRow extends StatelessWidget {
   const ReusableOrderQrCodeRow({
@@ -31,105 +29,94 @@ class ReusableOrderQrCodeRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+            ReusableQrCode(
+              expiredIcon: const SvgImage(
+                asset: smallExclamationIcon,
+              ),
+              qrCodeBorderColor: statusColour,
+              qrCodeDate: qrCodeData,
+              qrCodeSize: 80,
+              borderWidth: 2,
+              borderSize: 10,
+              isQrcodeExpired: isQrcodeExpired,
+            ),
+            const SizedBox(
+              width: 24,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ReusableQrCode(
-                  expiredIcon:const  SvgImage(asset: smallExclamationIcon,),
-                  qrCodeBorderColor: statusColour,
-                  qrCodeDate: qrCodeData,
-                  qrCodeSize: 80,
-                  borderWidth: 2,
-                  borderSize: 10,
-                  isQrcodeExpired: isQrcodeExpired,
+                Text(
+                  fillingStationName,
+                  style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF002933)),
                 ),
                 const SizedBox(
-                  width: 24,
+                  height: 6,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      fillingStationName,
-                      style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xFF002933)),
+                Text(
+                  fillingStationLocation,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF002933),
+                  ),
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                RichText(
+                  text: TextSpan(
+                    text: '$productQuantity - ',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF002933),
+                      fontWeight: FontWeight.w400,
                     ),
-                    const SizedBox(
-                      height: 6,
-                    ),
-                    Text(
-                      fillingStationLocation,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF002933),),
-                    ),
-                    const SizedBox(
-                      height: 6,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        text: '$productQuantity - ',
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: productAmount,
                         style: const TextStyle(
                           fontSize: 12,
                           color: Color(0xFF002933),
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w700,
                         ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: productAmount,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF002933),
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      date,
-                      style: const TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF909090)),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  date,
+                  style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF909090)),
                 ),
               ],
             ),
-            GestureDetector(
-              onTap: onTap,
-              child: const Text(
-                "View QR code",
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF1875F7)),
-              ),
-            ),
           ],
         ),
-        const SizedBox(
-          height: 16,
-        ),
-        const Divider(
-          thickness: 1,
-          color: Color(0xFFEDECEC),
-        ),
-        const SizedBox(
-          height: 16,
+        GestureDetector(
+          onTap: onTap,
+          child: const Text(
+            "View QR code",
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF1875F7)),
+          ),
         ),
       ],
     );

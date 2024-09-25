@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/input_field.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../core/presentation/manager/comment_provider.dart';
 import '../../../../../core/presentation/resources/drawables.dart';
 import '../../../../../core/presentation/theme/colors/colors.dart';
 import '../../widgets/custom_stroked_button.dart';
@@ -13,11 +15,9 @@ class PaymentPortion extends StatefulWidget {
   const PaymentPortion({
     super.key,
     required this.nextPage,
-    required this.commentControllerText,
   });
 
   final Function() nextPage;
-  final String commentControllerText;
 
   @override
   State<PaymentPortion> createState() => _PaymentPortionState();
@@ -42,6 +42,7 @@ class _PaymentPortionState extends State<PaymentPortion> {
 
   @override
   Widget build(BuildContext context) {
+    final commentProvider = Provider.of<CommentsProvider>(context);
     final theme = Theme.of(context);
     return SingleChildScrollView(
       child: Padding(
@@ -61,39 +62,41 @@ class _PaymentPortionState extends State<PaymentPortion> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SvgImage(asset: locationIcon,),
+                        const SvgImage(
+                          asset: locationIcon,
+                        ),
                         const SizedBox(
                           width: 16,
                         ),
-                         Column(
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Total Filling Station",
-                              style:
-                                 theme.textTheme.labelLarge?.copyWith(
-                                   fontSize: 16,
-                                   color: theme.colorScheme.onSurface,
-                                 ),
+                              style: theme.textTheme.labelLarge?.copyWith(
+                                fontSize: 16,
+                                color: theme.colorScheme.onSurface,
+                              ),
                             ),
-                           const  SizedBox(
+                            const SizedBox(
                               height: 2,
                             ),
-                             Text(
+                            Text(
                               "Smith Roundabout",
-                              style:
-                                  theme.textTheme.labelMedium?.copyWith(
-                                    fontSize: 14,
-                                    color: mediumGray2,
-                                  ),
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                fontSize: 14,
+                                color: mediumGray2,
+                              ),
                             )
                           ],
                         )
                       ],
                     ),
                     const Padding(
-                      padding:  EdgeInsets.only(top: 4),
-                      child: SvgImage(asset: sideArrow,),
+                      padding: EdgeInsets.only(top: 4),
+                      child: SvgImage(
+                        asset: sideArrow,
+                      ),
                     )
                   ],
                 ),
@@ -121,20 +124,19 @@ class _PaymentPortionState extends State<PaymentPortion> {
               productSummaryPrice: 8200,
               isSvg: false,
             ),
-             Text(
+            Text(
               "Comment",
-              style:
-                  theme.textTheme.labelMedium?.copyWith(
-                    fontSize: 16,
-                    color: theme.colorScheme.onSurface,
-                  ),
+              style: theme.textTheme.labelMedium?.copyWith(
+                fontSize: 16,
+                color: theme.colorScheme.onSurface,
+              ),
             ),
             const SizedBox(
               height: 16,
             ),
             Text(
-              widget.commentControllerText,
-              style:  theme.textTheme.labelSmall?.copyWith(
+              commentProvider.checkoutComment,
+              style: theme.textTheme.labelSmall?.copyWith(
                 fontSize: 16,
                 color: theme.colorScheme.onSurface,
               ),
@@ -146,7 +148,7 @@ class _PaymentPortionState extends State<PaymentPortion> {
             const SizedBox(
               height: 16,
             ),
-             Text(
+            Text(
               "Send as Gift",
               style: theme.textTheme.labelMedium?.copyWith(
                 fontSize: 16,
@@ -166,17 +168,11 @@ class _PaymentPortionState extends State<PaymentPortion> {
             Row(
               children: [
                 Expanded(
-                  child:
-                      InputField2(
-            hint: 'Enter Promo Code', onChange: (val ) {  },
+                  child: InputField2(
+                    hint: 'Enter Promo Code',
+                    onChange: (val) {},
+                  ),
 
-            ),
-                  // CustomTextField(
-                  //   label: "Enter Promo Code",
-                  //   horizontal: 16,
-                  //   vertical: 14,
-                  //   buttonController: _controller,
-                  // ),
                 ),
                 const SizedBox(
                   width: 12,
@@ -204,10 +200,9 @@ class _PaymentPortionState extends State<PaymentPortion> {
             const SizedBox(
               height: 32,
             ),
-             Text(
+            Text(
               "Payment Method",
-              style:
-              theme.textTheme.labelLarge?.copyWith(
+              style: theme.textTheme.labelLarge?.copyWith(
                 fontSize: 16,
                 color: theme.colorScheme.onSurface,
               ),
@@ -245,7 +240,7 @@ class _PaymentPortionState extends State<PaymentPortion> {
               isDescription: true,
               isCustomButtonVisible: true,
               isClicked: isPaymentMethodeClicked,
-              widget:const  SvgImage(asset: selectedIcon),
+              widget: const SvgImage(asset: selectedIcon),
               value: 'Card',
               groupValue: groupValue,
             ),
@@ -261,7 +256,7 @@ class _PaymentPortionState extends State<PaymentPortion> {
               isDescription: true,
               isCustomButtonVisible: true,
               isClicked: isPaymentMethodeClicked,
-              widget: const  SvgImage(asset: selectedIcon),
+              widget: const SvgImage(asset: selectedIcon),
               value: 'Loans',
               groupValue: groupValue,
             ),
@@ -278,7 +273,7 @@ class _PaymentPortionState extends State<PaymentPortion> {
               isDescription: true,
               isCustomButtonVisible: false,
               isClicked: isPaymentMethodeClicked,
-              widget: const  SvgImage(asset: selectedIcon),
+              widget: const SvgImage(asset: selectedIcon),
               value: 'Pay Online',
               groupValue: groupValue,
             ),

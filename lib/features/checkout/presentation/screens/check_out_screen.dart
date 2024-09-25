@@ -3,30 +3,28 @@ import 'package:gaspay_mobile/core/presentation/widgets/button.dart';
 import 'package:gaspay_mobile/features/checkout/presentation/screens/checkout_transaction_pin_screen.dart';
 import 'package:gaspay_mobile/features/checkout/presentation/screens/portions/details_portion.dart';
 import 'package:gaspay_mobile/features/checkout/presentation/screens/portions/payment_portion.dart';
-
+import 'package:provider/provider.dart';
+import '../../../../core/presentation/manager/comment_provider.dart';
 import '../../../../core/presentation/theme/colors/colors.dart';
 import '../../../../core/presentation/widgets/reusable_back_button_with_title.dart';
+import '../../../add to cart/presentation/manager/add_to_cart_list_provider.dart';
 import '../widgets/check_out_indicator_progress_row.dart';
 
 class CheckOutScreen extends StatefulWidget {
   const CheckOutScreen({
     super.key,
-    required this.newCart,
-    required this.totalAmount,
-    this.controller,
   });
-
-  final List newCart;
-  final double totalAmount;
-  final TextEditingController? controller;
 
   @override
   State<CheckOutScreen> createState() => _CheckOutScreenState();
 }
 
 class _CheckOutScreenState extends State<CheckOutScreen> {
+  AddToCartListProvider addToCartListProvider = AddToCartListProvider();
+
   @override
   Widget build(BuildContext context) {
+    final addToCartListProvider = Provider.of<AddToCartListProvider>(context);
     final theme = Theme.of(context);
     final List<Widget> screens = getScreens();
     return Scaffold(
@@ -93,9 +91,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 bottom: 40,
                 top: 28,
               ),
-              decoration: BoxDecoration(color:theme.colorScheme.surface, boxShadow: [
+              decoration:
+                  BoxDecoration(color: theme.colorScheme.surface, boxShadow: [
                 BoxShadow(
-                  color:  colorBlack.withOpacity(0.25),
+                  color: colorBlack.withOpacity(0.25),
                   blurRadius: 18,
                   offset: const Offset(0, 2),
                 ),
@@ -109,16 +108,15 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       Row(
                         children: [
                           Text(
-                            "Order Total(${widget.newCart.length})",
-                            style:
-                                theme.textTheme.labelMedium?.copyWith(
-                                  fontSize: 16,
-                                  color: mediumGray2,
-                                ),
+                            "Order Total(${addToCartListProvider.items.length})",
+                            style: theme.textTheme.labelMedium?.copyWith(
+                              fontSize: 16,
+                              color: mediumGray2,
+                            ),
                           ),
                           const Icon(
                             Icons.keyboard_arrow_down_sharp,
-                            color:blueTabBarContainerColor,
+                            color: blueTabBarContainerColor,
                           )
                         ],
                       ),
@@ -126,9 +124,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         height: 2,
                       ),
                       Text(
-                        "NGN ${widget.totalAmount}",
-                        style:
-                        theme.textTheme.labelLarge?.copyWith(
+                        "NGN ${addToCartListProvider.getTotalAmount().toStringAsFixed(1)}",
+                        style: theme.textTheme.labelLarge?.copyWith(
                           fontSize: 18,
                           color: theme.colorScheme.onSurface,
                         ),
@@ -136,9 +133,11 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     ],
                   ),
                   CustomElevatedButton(
-                    label: "Proceed", onTap: (){
-                    nextPage();
-                  },),
+                    label: "Proceed",
+                    onTap: () {
+                      nextPage();
+                    },
+                  ),
                 ],
               ),
             ),
@@ -151,9 +150,20 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   late PageController pageController;
   int currentPage = 0;
 
+  late TextEditingController commentController;
+
   @override
   void initState() {
     super.initState();
+    final commentsProvider =
+        Provider.of<CommentsProvider>(context, listen: false);
+    if (commentsProvider.commentAddToCart1.isNotEmpty) {
+      commentController =
+          TextEditingController(text: commentsProvider.commentAddToCart1);
+    } else {
+      commentController =
+          TextEditingController(text: commentsProvider.commentAddToCart2);
+    }
     pageController = PageController();
   }
 
@@ -184,12 +194,81 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     return [
       DetailsPortion(
         nextPage: nextPage,
-        controller: widget.controller ?? TextEditingController(),
       ),
       PaymentPortion(
         nextPage: nextPage,
-        commentControllerText: widget.controller?.text ?? "",
       ),
     ];
   }
+}
+
+class Product {
+  Product({
+    required this.id,
+    this.image,
+    required this.name,
+    required this.price,
+    required this.category,
+    this.addedToCart = false,
+    this.quantity = 0,
+  });
+
+  final int id;
+  final String? image;
+  final String name;
+  final double price;
+  final String category;
+  bool addedToCart;
+  int quantity;
+
+  static List<Product> allProducts = [
+    Product(
+      id: 1,
+      image: "assets/images/buyGas2.png",
+      name: "Petrol",
+      price: 100,
+      category: 'Fuel',
+    ),
+    Product(
+      id: 2,
+      image: "assets/images/buyGas2.png",
+      name: "Diesel",
+      price: 120,
+      category: 'Fuel',
+    ),
+    Product(
+      id: 3,
+      image: "assets/images/buyGas2.png",
+      name: "Synthetic Oil",
+      price: 200,
+      category: 'Engine Oil',
+    ),
+    Product(
+      id: 4,
+      image: "assets/images/buyGas2.png",
+      name: "Mineral Oil",
+      price: 150,
+      category: 'Engine Oil',
+    ),Product(
+      id: 5,
+      name: "PMS",
+      price: 800,
+      category: 'Petroleum Product',
+    ),Product(
+      id: 6,
+      name: "Diesel",
+      price: 1200,
+      category: 'Petroleum Product',
+    ),Product(
+      id: 7,
+      name: "Kerosene",
+      price: 500,
+      category: 'Petroleum Product',
+    ),Product(
+      id: 8,
+      name: "Cooking",
+      price: 1200,
+      category: 'Petroleum Product',
+    ),
+  ];
 }

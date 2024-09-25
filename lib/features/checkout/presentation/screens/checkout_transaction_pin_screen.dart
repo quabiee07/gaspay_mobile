@@ -6,7 +6,6 @@ import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
 
 import '../../../../core/domain/utils/qr_code_enums.dart';
-import '../../../../core/presentation/manager/global_comment_controller.dart';
 import '../../../../core/presentation/theme/colors/colors.dart';
 import '../../../../core/presentation/widgets/reusable_back_button_with_title.dart';
 import '../../../receipt/presentation/screens/receipt_screen.dart';

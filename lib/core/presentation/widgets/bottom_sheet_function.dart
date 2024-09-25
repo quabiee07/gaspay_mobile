@@ -9,7 +9,7 @@ class BottomSheetFunction {
     required Color color,
     bool? bottomPadding,
     bool? topPadding,
-    bool? dismissible = true,
+    bool? dismissible = false,
   }) {
     final theme = Theme.of(context);
     showModalBottomSheet(

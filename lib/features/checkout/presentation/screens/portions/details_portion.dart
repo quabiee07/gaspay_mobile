@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gaspay_mobile/core/presentation/manager/comment_provider.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/button.dart';
+import 'package:gaspay_mobile/core/presentation/widgets/custom_comment_text_field_container.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/custom_image.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
 import 'package:gaspay_mobile/features/checkout/presentation/screens/beneficiaries_screen.dart';
+import 'package:provider/provider.dart';
 import '../../../../../core/presentation/resources/drawables.dart';
 import '../../../../../core/presentation/theme/colors/colors.dart';
 import '../../../../../core/presentation/widgets/bottom_sheet_function.dart';
@@ -11,31 +14,39 @@ import '../../widgets/reusable_beneficiaries_column.dart';
 import '../../widgets/reusable_summary_product_row.dart';
 
 class DetailsPortion extends StatefulWidget {
-  const DetailsPortion({super.key, required this.nextPage, this.controller});
+  const DetailsPortion(
+      {super.key, required this.nextPage, });
 
   final Function() nextPage;
-  final TextEditingController? controller;
 
   @override
   State<DetailsPortion> createState() => _DetailsPortionState();
 }
 
 class _DetailsPortionState extends State<DetailsPortion> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   bool isCommentIconClicked = false;
   bool isSendAGiftClicked = false;
   final TextEditingController _purchasingForController =
       TextEditingController();
-  final TextEditingController _fromController = TextEditingController();
-  final TextEditingController _recipientEmailAddress = TextEditingController();
-  final TextEditingController _message = TextEditingController();
+  late FocusNode _focusNode;
+  late TextEditingController commentController;
+  @override
+  void initState() {
+    _focusNode = FocusNode();
+    final commentProvider = Provider.of<CommentsProvider>(context, listen: false);
+    commentController = TextEditingController(text: commentProvider.checkoutComment);
+    super.initState();
+  }
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final commentProvider = Provider.of<CommentsProvider>(context);
+
     final theme = Theme.of(context);
     return SingleChildScrollView(
       child: Padding(
@@ -152,57 +163,14 @@ class _DetailsPortionState extends State<DetailsPortion> {
               height: 16,
             ),
             isCommentIconClicked
-                ? Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.surface,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        width: 1,
-                        color: lightGray,
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextField(
-                          readOnly: !isCommentIconClicked,
-                          controller: widget.controller,
-                          style: theme.textTheme.labelSmall?.copyWith(
-                            fontSize: 16,
-                            color: theme.colorScheme.onSurface,
-                          ),
-                          minLines: 1,
-                          maxLength: 114,
-                          maxLines: 3,
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintText:
-                                "(optional)\nE.g I will be coming with a keg",
-                            hintStyle: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF768589),
-                            ),
-                            counterText: '',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        const Text(
-                          "114 Character",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF909C9F),
-                          ),
-                        ),
-                      ],
-                    ),
+                ? CustomCommentTextFieldContainer(
+                    commentController:commentController,
+                    onChange: (newComment) {
+                      commentProvider.updateCheckoutComment(newComment);
+                    }, focusNode:  _focusNode,
                   )
-                //TODO: don't forget to change to custom textfield
                 : Text(
-                    "${widget.controller?.text}",
+              commentProvider.checkoutComment,
                     style: theme.textTheme.labelSmall?.copyWith(
                       fontSize: 16,
                       color: theme.colorScheme.onSurface,
@@ -384,12 +352,6 @@ class _DetailsPortionState extends State<DetailsPortion> {
                   hint: 'Purchasing For',
                   onChange: (val) {},
                 ),
-                // CustomTextField(
-                //   label: 'Purchasing For',
-                //   horizontal: 16,
-                //   vertical: 19,
-                //   buttonController: _purchasingForController,
-                // ),
                 const SizedBox(
                   height: 16,
                 ),
@@ -397,12 +359,6 @@ class _DetailsPortionState extends State<DetailsPortion> {
                   hint: 'From',
                   onChange: (val) {},
                 ),
-                // CustomTextField(
-                //   label: 'From',
-                //   horizontal: 16,
-                //   vertical: 19,
-                //   buttonController: _fromController,
-                // ),
                 const SizedBox(
                   height: 16,
                 ),
@@ -410,12 +366,6 @@ class _DetailsPortionState extends State<DetailsPortion> {
                   hint: 'Recipient Email address',
                   onChange: (val) {},
                 ),
-                // CustomTextField(
-                //   label: 'Recipient Email address',
-                //   horizontal: 16,
-                //   vertical: 19,
-                //   buttonController: _recipientEmailAddress,
-                // ),
                 const SizedBox(
                   height: 16,
                 ),
@@ -423,12 +373,6 @@ class _DetailsPortionState extends State<DetailsPortion> {
                   hint: 'Message (Optional)',
                   onChange: (val) {},
                 ),
-                // CustomTextField(
-                //   label: 'Message (Optional)',
-                //   horizontal: 16,
-                //   vertical: 19,
-                //   buttonController: _message,
-                // ),
                 const SizedBox(
                   height: 40,
                 ),
@@ -443,41 +387,6 @@ class _DetailsPortionState extends State<DetailsPortion> {
                         },
                       ),
                     )
-                    // Expanded(
-                    //   child: ElevatedButton(
-                    //     style: ButtonStyle(
-                    //       shadowColor: WidgetStateProperty.all(gray),
-                    //       shape: WidgetStateProperty.all(
-                    //         RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(
-                    //             24,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       elevation: WidgetStateProperty.all(0),
-                    //       backgroundColor: WidgetStateProperty.all(
-                    //         blueTabBarContainerColor,
-                    //       ),
-                    //       padding: WidgetStateProperty.all(
-                    //         const EdgeInsets.symmetric(
-                    //           vertical: 18,
-                    //           horizontal: 40,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     onPressed: () {
-                    //       Navigator.pop(context);
-                    //       setState(() {});
-                    //     },
-                    //     child: Text(
-                    //       "Confirm Details",
-                    //       style: theme.textTheme.labelLarge?.copyWith(
-                    //         fontSize: 16,
-                    //         color: theme.colorScheme.surface,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ],
@@ -491,173 +400,180 @@ class _DetailsPortionState extends State<DetailsPortion> {
   vehicleDetailsBottomSheet() {
     final theme = Theme.of(context);
     BottomSheetFunction.showCustomBottomSheet(
-      context: context,
-      color: theme.colorScheme.surface,
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.only(
-              top: 10,
-              left: 20,
-              right: 20,
-            ),
-            color: borderLightGray,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Vehicle Details",
-                  style: theme.textTheme.labelLarge?.copyWith(
-                      fontSize: 16, color: theme.colorScheme.onSurface),
+        context: context,
+        color: theme.colorScheme.surface,
+        child: StatefulBuilder(builder: (context, setState) {
+          return Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  left: 20,
+                  right: 20,
                 ),
-                const Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 8),
-                      child: Column(
-                        children: [
-                          CustomImage(asset: blueCar),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Icon(
-                      Icons.close,
-                      color: blueTabBarContainerColor,
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
-              children: [
-                Row(
+                color: borderLightGray,
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Beneficiaries",
-                      style: theme.textTheme.labelLarge!.copyWith(
-                          fontSize: 14, color: theme.colorScheme.onSurface),
+                      "Vehicle Details",
+                      style: theme.textTheme.labelLarge?.copyWith(
+                          fontSize: 16, color: theme.colorScheme.onSurface),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const BeneficiariesScreen(),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 8),
+                          child: Column(
+                            children: [
+                              CustomImage(asset: blueCar),
+                            ],
                           ),
-                        );
-                      },
-                      child: Text(
-                        "View all",
-                        style: theme.textTheme.labelLarge!.copyWith(
-                          fontSize: 14,
-                          color: blueTabBarContainerColor,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 80,
-                        child: ListView.builder(
-                          itemCount: 4,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return const ReusableBeneficiariesColumn();
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
                           },
+                          child: const Icon(
+                            Icons.close,
+                            color: blueTabBarContainerColor,
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InputField2(
-                  hint: 'Driver Name',
-                  onChange: (val) {},
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                InputField2(
-                  hint: 'Car License Plate',
-                  onChange: (val) {},
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                InputField2(
-                  hint: 'Vehicle Brand',
-                  onChange: (val) {},
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                InputField2(
-                  hint: 'Vehicle Colour',
-                  onChange: (val) {},
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                SwitchListTile(
-                  title: Text(
-                    "Save Vehicle Details",
-                    style: theme.textTheme.labelLarge!.copyWith(
-                        fontSize: 16, color: theme.colorScheme.onSurface),
-                  ),
-                  activeColor: theme.colorScheme.surface,
-                  contentPadding: EdgeInsets.zero,
-                  activeTrackColor: blueTabBarContainerColor,
-                  inactiveTrackColor: darkGray1.withOpacity(0.17),
-                  inactiveThumbColor: theme.colorScheme.surface,
-                  trackOutlineColor:
-                      WidgetStateProperty.all(theme.colorScheme.surface),
-                  thumbIcon: WidgetStateProperty.all(const Icon(null)),
-                  value: isSwitch,
-                  onChanged: (value) {
-                    setState(() {
-                      isSwitch = value;
-                    });
-                  },
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomElevatedButton(
-                        label: "Confirm Details",
-                        onTap: () {
-                          Navigator.pop(context);
-                          setState(() {});
-                        },
-                      ),
+                      ],
                     )
                   ],
                 ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Beneficiaries",
+                          style: theme.textTheme.labelLarge!.copyWith(
+                              fontSize: 14, color: theme.colorScheme.onSurface),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const BeneficiariesScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "View all",
+                            style: theme.textTheme.labelLarge!.copyWith(
+                              fontSize: 14,
+                              color: blueTabBarContainerColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 80,
+                            child: ListView.builder(
+                              itemCount: 4,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return const ReusableBeneficiariesColumn();
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    InputField2(
+                      hint: 'Driver Name',
+                      onChange: (val) {},
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    InputField2(
+                      hint: 'Car License Plate',
+                      onChange: (val) {},
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    InputField2(
+                      hint: 'Vehicle Brand',
+                      onChange: (val) {},
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    InputField2(
+                      hint: 'Vehicle Colour',
+                      onChange: (val) {},
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    SwitchListTile(
+                      title: Text(
+                        "Save Vehicle Details",
+                        style: theme.textTheme.labelLarge!.copyWith(
+                            fontSize: 16, color: theme.colorScheme.onSurface),
+                      ),
+                      activeColor: theme.colorScheme.surface,
+                      contentPadding: EdgeInsets.zero,
+                      activeTrackColor: blueTabBarContainerColor,
+                      inactiveTrackColor: darkGray1.withOpacity(0.17),
+                      inactiveThumbColor: theme.colorScheme.surface,
+                      trackOutlineColor:
+                          WidgetStateProperty.all(theme.colorScheme.surface),
+                      thumbIcon: WidgetStateProperty.all(const Icon(null)),
+                      value: isSwitch,
+                      onChanged: (value) {
+                        setState(() {
+                          isSwitch = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomElevatedButton(
+                            label: "Confirm Details",
+                            onTap: () {
+                              Navigator.pop(context);
+                              setState(() {});
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        }));
   }
 
   bool isSwitch = false;
 }
-

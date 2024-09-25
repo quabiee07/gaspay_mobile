@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gaspay_mobile/features/buy%20gas/presentation/screens/portions/favourites_portion.dart';
 import 'package:gaspay_mobile/features/featured%20brands/presentation/screens/portions/all_portion.dart';
 import 'package:gaspay_mobile/features/featured%20brands/presentation/screens/portions/nearst_to_farthest.dart';
-
 import '../../../../core/presentation/widgets/reusable_back_button_with_title.dart';
 import 'buy_gas_add_to_cart_screen.dart';
 
@@ -32,6 +31,7 @@ class _BuyGasScreenState extends State<BuyGasScreen>
     });
     super.initState();
   }
+
   @override
   void dispose() {
     tabController.dispose();
@@ -109,7 +109,7 @@ class _BuyGasScreenState extends State<BuyGasScreen>
                   controller: tabController,
                   labelColor: const Color(0xFFFFFFFF),
                   unselectedLabelColor:
-                  const Color(0xFF002933).withOpacity(0.50),
+                      const Color(0xFF002933).withOpacity(0.50),
                   labelStyle: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 12,
@@ -167,27 +167,27 @@ class _BuyGasScreenState extends State<BuyGasScreen>
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
-                              const BuyGasAddToCartScreen(),
+                                  const BuyGasAddToCartScreen(),
                             ),
                           );
                         },
                       ),
-                      // FavouritesPortion(
-                      //   reusableFillingStationContainerOnTap: () {
-                      //     Navigator.of(context).push(
-                      //       MaterialPageRoute(
-                      //         builder: (context) =>
-                      //         const BuyGasAddToCartScreen(),
-                      //       ),
-                      //     );
-                      //   },
-                      // ),
+                      FavouritesPortion(
+                        reusableFillingStationContainerOnTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const BuyGasAddToCartScreen(),
+                            ),
+                          );
+                        },
+                      ),
                       NearestOfFarthestPortion(
                         reusableFillingStationContainerOnTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
-                              const BuyGasAddToCartScreen(),
+                                  const BuyGasAddToCartScreen(),
                             ),
                           );
                         },
@@ -201,5 +201,3 @@ class _BuyGasScreenState extends State<BuyGasScreen>
     );
   }
 }
-
-

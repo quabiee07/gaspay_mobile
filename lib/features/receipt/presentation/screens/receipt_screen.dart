@@ -47,10 +47,7 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
               children: [
                 ReusableBackButtonWithTitle(
                   isBackIconVisible: false,
-                  prefixWidget: const Icon(
-                    Icons.close,
-                    color: mediumGray2,
-                  ),
+                  prefixWidget: const SizedBox.shrink(),
                   suffixWidget: const Icon(
                     Icons.ios_share,
                     color: mediumGray2,

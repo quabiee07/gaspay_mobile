@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gaspay_mobile/core/presentation/widgets/svg_image.dart';
+import 'package:gaspay_mobile/features/order/presentation/screens/archive_screen.dart';
 
 import '../../../../../core/presentation/resources/drawables.dart';
 import '../../../../../core/presentation/theme/colors/colors.dart';
@@ -40,57 +41,78 @@ class _OrderFragmentState extends State<OrderFragment>
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(
-          20,
-        ),
         child: Column(
           children: [
-            ReusableBackButtonWithTitle(
-              isText: true,
-              title: "Order",
-              onTap: () {},
-              isBackIconVisible: false,
-              prefixWidget: const SizedBox.shrink(),
-              suffixWidget: const SvgImage(asset: archiveIcon),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: ReusableBackButtonWithTitle(
+                isText: true,
+                title: "Order",
+                onTap: () {},
+                isBackIconVisible: false,
+                prefixWidget: const SizedBox.shrink(),
+                suffixWidget: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>  ArchiveScreen(),
+                      ),
+                    );
+                  },
+                  child: const SvgImage(asset: archiveIcon),
+                ),
+              ),
             ),
             const SizedBox(
               height: 20,
             ),
-            TabBar(
-              indicator:  UnderlineTabIndicator(
-                borderSide: BorderSide(
-                  width: 2,
-                  color: theme.colorScheme.primary,
-                ),
-                insets: const EdgeInsets.only(
-                  bottom: 8,
-                ),
+            Container(
+              height: 40,
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                width: 1,
+                color: lightGray,
+              ))),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TabBar(
+                    indicator: UnderlineTabIndicator(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: theme.colorScheme.primary,
+                      ),
+                    ),
+                    indicatorSize: TabBarIndicatorSize.label,
+                    tabAlignment: TabAlignment.center,
+                    overlayColor: WidgetStateColor.transparent,
+                    dividerColor: transparent,
+                    controller: tabController,
+                    labelColor: theme.colorScheme.primary,
+                    unselectedLabelColor: orderTabTextDarkGray,
+                    labelStyle: theme.textTheme.labelMedium?.copyWith(
+                      fontSize: 12,
+                    ),
+                    unselectedLabelStyle: theme.textTheme.labelMedium?.copyWith(
+                      fontSize: 12,
+                    ),
+                    tabs: const [
+                      Tab(
+                        text: "Pending",
+                      ),
+                      Tab(
+                        text: "Redeemed",
+                      ),
+                      Tab(
+                        text: "Expired",
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              indicatorSize: TabBarIndicatorSize.label,
-              tabAlignment: TabAlignment.center,
-              overlayColor: WidgetStateColor.transparent,
-              dividerColor: const Color(0xFFE6E6E6),
-              controller: tabController,
-              labelColor:  theme.colorScheme.primary,
-              unselectedLabelColor: orderTabTextDarkGray,
-              labelStyle: theme.textTheme.labelMedium?.copyWith(
-                fontSize: 12,
-              ),
-              unselectedLabelStyle: theme.textTheme.labelMedium?.copyWith(
-                fontSize: 12,
-              ),
-              tabs: const [
-                Tab(
-                  text: "Pending",
-                ),
-                Tab(
-                  text: "Redeemed",
-                ),
-                Tab(
-                  text: "Expired",
-                ),
-              ],
             ),
             Expanded(
               child: TabBarView(
@@ -104,7 +126,6 @@ class _OrderFragmentState extends State<OrderFragment>
             ),
           ],
         ),
-      ),
       ),
     );
   }

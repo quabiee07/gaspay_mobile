@@ -66,6 +66,8 @@ const darkGray1 = Color(0xFF787880);
 const beneficiariesCircleAvatarColour= Color(0xFFD321F0);
 const redButtonColor= Color(0xFFFF3B3B);
 const darkGreen1= Color(0xFF143A43);
+const archiveBlue= Color(0xFF00297A);
+const petroleumProductActiveColor= Color(0xFFF5F9FF);
 const transparent = Colors.transparent;
 
 const aiGradient2 = Color(0xFF1e1e1e);
