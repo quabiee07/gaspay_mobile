@@ -41,8 +41,8 @@ class _LoansDashboardScreenState extends CustomState<LoansDashboardScreen>
 
   @override
   void onDestroy() {
-    _tabController.dispose();
     super.dispose();
+    _tabController.dispose();
   }
 
   final title = ['SCORE', 'OVERVIEW'];
