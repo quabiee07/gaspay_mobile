@@ -30,7 +30,17 @@ const icEnableLocation = 'assets/vectors/enable_location.svg';
 const icLocation1 = 'assets/vectors/location1.svg';
 const icLocation2 = 'assets/vectors/location2.svg';
 const icLocation3 = 'assets/vectors/location3.svg';
-const icProfile = 'assets/images/inActiveProfileIcon.svg';
+const icProfile = 'assets/vectors/ic_user_profile.svg';
+const icLogout = 'assets/vectors/ic_logout.svg';
+const icNotification = 'assets/vectors/ic_notification.svg';
+const icPayment = 'assets/vectors/ic_payment.svg';
+const icPolicy = 'assets/vectors/ic_privacy_policy.svg';
+const icRating = 'assets/vectors/ic_rating.svg';
+const icSupport = 'assets/vectors/ic_support.svg';
+const icPromo = 'assets/vectors/ic_promo.svg';
+const icWallet = 'assets/vectors/ic_wallet.svg';
+const icWalletBg = 'assets/vectors/wallet_bg.svg';
+const icVisa = 'assets/vectors/visa.svg';
 
 
 const imgOnboard1 = 'assets/images/onbd1.png';
@@ -55,3 +65,5 @@ const loanPic = 'assets/vectors/loanBg.svg';
 const cardPic = 'assets/vectors/ic_card.svg';
 const checkMark = 'assets/images/check_mark.png';
 const idCard = 'assets/images/id_card.png';
+const money = 'assets/images/money.png';
+const paystack = 'assets/images/paystack.png';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class BorderContainer extends StatelessWidget {
   const BorderContainer({
@@ -26,8 +27,24 @@ class BorderContainer extends StatelessWidget {
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: children,
       ),
+    );
+  }
+}
+
+class AppDivider extends StatelessWidget {
+  const AppDivider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        Gap(8),
+        Divider(color: Color(0xFFF0F0F0)),
+        Gap(8),
+      ],
     );
   }
 }
